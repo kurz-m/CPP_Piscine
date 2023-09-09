@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+.ccls-cache/
+cpp_bak/*
+CPP_Learnings/
