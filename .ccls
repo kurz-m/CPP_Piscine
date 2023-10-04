@@ -1,0 +1,7 @@
+-Wall
+-Werror
+-Wextra
+-lreadline
+-lcriterion
+-I/Users/makurz/.brew/cellar/readline/8.2.1/include/readline
+-I./include/
