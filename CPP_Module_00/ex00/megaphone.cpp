@@ -6,20 +6,20 @@
 /*   By: makurz <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 23:30:35 by makurz            #+#    #+#             */
-/*   Updated: 2023/09/09 11:28:53 by makurz           ###   ########.fr       */
+/*   Updated: 2023/09/12 19:59:23 by makurz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 
-std::string to_upper(std::string str)
+std::string to_upper(std::string s)
 {
   std::string::iterator   it;
 
-  for (it = str.begin(); it != str.end(); it++) {
+  for (it = s.begin(); it != s.end(); it++) {
     *it = std::toupper(static_cast<unsigned char>(*it));
   }
-  return str;
+  return s;
 }
 
 int main(int argc, char **argv)
