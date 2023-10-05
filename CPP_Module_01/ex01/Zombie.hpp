@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ZOMBIE_HPP_
+#define ZOMBIE_HPP_
 
 #include <iostream>
 #include <string>
@@ -17,3 +18,5 @@ private:
 };
 
 Zombie  *zombieHorde(int N, std::string);
+
+#endif
