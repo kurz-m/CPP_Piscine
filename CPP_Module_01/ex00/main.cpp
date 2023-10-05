@@ -1,4 +1,4 @@
-#include "Zombie.class.hpp"
+#include "Zombie.hpp"
 
 int main(void) {
   Zombie* heap_zombie_a;
