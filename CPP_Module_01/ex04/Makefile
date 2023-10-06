@@ -1,4 +1,4 @@
-NAME := ex03
+NAME := ex04
 .DEFAULT_GOAL := all
 CC := c++
 
@@ -6,10 +6,10 @@ CC := c++
 ###############                 PRINT OPTIONS                     ##############
 ################################################################################
 
-G := \033[32m
+G := \033[31m
 X := \033[0m
 BO := $(shell tput bold)
-LOG := printf "[$(BO)$(G)ⓘ INFO$(X)] %s\n"
+LOG := printf "[$(BO)$(G)ⓘ TEST$(X)] %s\n"
 
 ################################################################################
 ###############                  DIRECTORIES                      ##############
@@ -27,7 +27,7 @@ vpath %.cpp $(SRC_DIRS)
 ###############                  SOURCE FILES                     ##############
 ################################################################################
 
-SRCS := HumanA.cpp HumanB.cpp Weapon.cpp main.cpp
+SRCS := Replacer.cpp main.cpp
 
 OBJS := $(addprefix $(OBJ_DIR)/, $(SRCS:%.cpp=%.o))
 
@@ -35,7 +35,7 @@ OBJS := $(addprefix $(OBJ_DIR)/, $(SRCS:%.cpp=%.o))
 ########                         COMPILING                      ################
 ################################################################################
 
-CFLAGS ?= -Wextra -Wall -Werror -std=c++98 -MMD -MP $(addprefix -I, $(INC_DIRS))
+CFLAGS ?= -Wextra -Wall -Werror -std=c++98 -MMD -MP $(addprefix -I, $(INC_DIRS)) -g
 LDFLAGS := 
 
 all: $(NAME)
@@ -71,8 +71,22 @@ fclean: clean
 		$(LOG) "No library to clean."; \
 	fi
 
+test:
+	@echo
+	@$(LOG) "Testing a single line document";
+	@./ex04 tests/single_line single "something else"
+	@diff tests/single_line tests/single_line.replace || true
+	@echo
+	@$(LOG) "Testing a double line document";
+	@./ex04 tests/double_line as et
+	@diff tests/double_line tests/double_line.replace || true
+	@echo
+	@$(LOG) "Testing a double line document";
+	@./ex04 tests/empty_lines "I'm" You
+	@diff tests/empty_lines tests/empty_lines.replace || true
+
 re: fclean all
 
 -include $(OBJS:%.o=%.d)
 
-.PHONY: all fclean clean re
+.PHONY: all fclean clean re test
