@@ -1,4 +1,4 @@
-NAME := ex03
+NAME := humans
 .DEFAULT_GOAL := all
 CC := c++
 

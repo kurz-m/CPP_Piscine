@@ -6,12 +6,19 @@
 /*   By: makurz <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 23:30:35 by makurz            #+#    #+#             */
-/*   Updated: 2023/09/12 19:59:23 by makurz           ###   ########.fr       */
+/*   Updated: 2023/10/06 20:52:14 by makurz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 
+// `SUMMARY`:
+// to_upper takes a string as input and returns all chars
+// in uppercase.
+// `PARAM`:
+// `s`: string to be converted to all uppercase
+// `RETURN`:
+// Converted string.
 std::string to_upper(std::string s)
 {
   std::string::iterator   it;
