@@ -1,4 +1,4 @@
-NAME := replacer
+NAME := harl
 .DEFAULT_GOAL := all
 CC := c++
 
@@ -7,11 +7,9 @@ CC := c++
 ################################################################################
 
 G := \033[32m
-R := \033[31m
 X := \033[0m
 BO := $(shell tput bold)
 LOG := printf "[$(BO)$(G)ⓘ INFO$(X)] %s\n"
-TEST := printf "[$(BO)$(R)ⓘ TEST$(X)] %s\n"
 
 ################################################################################
 ###############                  DIRECTORIES                      ##############
@@ -29,7 +27,7 @@ vpath %.cpp $(SRC_DIRS)
 ###############                  SOURCE FILES                     ##############
 ################################################################################
 
-SRCS := Replacer.cpp main.cpp
+SRCS := Harl.cpp main.cpp
 
 OBJS := $(addprefix $(OBJ_DIR)/, $(SRCS:%.cpp=%.o))
 
@@ -75,15 +73,15 @@ fclean: clean
 
 test:
 	@echo
-	@$(TEST) "Testing a single line document";
+	@$(LOG) "Testing a single line document";
 	@./ex04 tests/single_line single "something else"
 	@diff tests/single_line tests/single_line.replace || true
 	@echo
-	@$(TEST) "Testing a double line document";
+	@$(LOG) "Testing a double line document";
 	@./ex04 tests/double_line as et
 	@diff tests/double_line tests/double_line.replace || true
 	@echo
-	@$(TEST) "Testing a double line document";
+	@$(LOG) "Testing a double line document";
 	@./ex04 tests/empty_lines "I'm" You
 	@diff tests/empty_lines tests/empty_lines.replace || true
 
