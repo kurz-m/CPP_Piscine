@@ -24,13 +24,13 @@ void    Harl::filter_()
   switch(complain_level_) {
     case debug:
       debug_();
-      // explicit fallthrough
+      // intentional fall-through
     case info:
       info_();
-      // explicit fallthrough
+      // intentional fall-through
     case warning:
       warning_();
-      // explicit fallthrough
+      // intentional fall-through
     case error:
       error_();
       break;
