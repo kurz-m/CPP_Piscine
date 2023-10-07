@@ -6,7 +6,7 @@ Harl::~Harl() {}
 
 void    Harl::complain(const std::string level) const
 {
-  std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+  const std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
   void (Harl::*f[4])() const = {
     &Harl::debug_,
     &Harl::info_,
