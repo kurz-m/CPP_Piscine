@@ -1,8 +1,8 @@
 #include "Zombie.hpp"
 
-void  randomChump(std::string name)
+void  randomChump(const std::string name)
 {
-  Zombie stack_zombie = Zombie(name);
+  const Zombie stack_zombie = Zombie(name);
   stack_zombie.announce();
   return;
 }

@@ -9,10 +9,10 @@ public:
   HumanA(std::string name, const Weapon& weapon);
   ~HumanA();
 
-  void  attack();
+  void  attack() const;
 
 private:
-  std::string   name_;
+  const std::string name_;
   const Weapon& weapon_;
 };
 

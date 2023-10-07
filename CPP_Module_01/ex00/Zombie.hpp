@@ -10,13 +10,13 @@ public:
   Zombie(std::string name);
   ~Zombie(void);
 
-  void  announce(void);
+  void announce() const;
 
 private:
-  std::string  name_;
+  const std::string name_;
 };
 
-Zombie* newZombie(std::string name);
-void  randomChump(std::string name);
+const Zombie* newZombie(const std::string name);
+void  randomChump(const std::string name);
 
 #endif

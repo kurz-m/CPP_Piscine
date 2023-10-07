@@ -76,15 +76,15 @@ fclean: clean
 test:
 	@echo
 	@$(TEST) "Testing a single line document";
-	@./ex04 tests/single_line single "something else"
+	@./replacer tests/single_line single "something else"
 	@diff tests/single_line tests/single_line.replace || true
 	@echo
 	@$(TEST) "Testing a double line document";
-	@./ex04 tests/double_line as et
+	@./replacer tests/double_line as et
 	@diff tests/double_line tests/double_line.replace || true
 	@echo
 	@$(TEST) "Testing a double line document";
-	@./ex04 tests/empty_lines "I'm" You
+	@./replacer tests/empty_lines "I'm" You
 	@diff tests/empty_lines tests/empty_lines.replace || true
 
 re: fclean all

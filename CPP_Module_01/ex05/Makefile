@@ -72,18 +72,6 @@ fclean: clean
 	fi
 
 test:
-	@echo
-	@$(LOG) "Testing a single line document";
-	@./ex04 tests/single_line single "something else"
-	@diff tests/single_line tests/single_line.replace || true
-	@echo
-	@$(LOG) "Testing a double line document";
-	@./ex04 tests/double_line as et
-	@diff tests/double_line tests/double_line.replace || true
-	@echo
-	@$(LOG) "Testing a double line document";
-	@./ex04 tests/empty_lines "I'm" You
-	@diff tests/empty_lines tests/empty_lines.replace || true
 
 re: fclean all
 

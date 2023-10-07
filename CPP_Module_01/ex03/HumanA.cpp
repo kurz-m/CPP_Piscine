@@ -5,7 +5,7 @@ HumanA::HumanA(std::string name, const Weapon& weapon)
 
 HumanA::~HumanA() {}
 
-void    HumanA::attack()
+void    HumanA::attack() const
 {
   std::cout << name_ << " attacks with their " << weapon_.get_type() << std::endl;
 }

@@ -13,13 +13,13 @@ public:
   Harl();
   ~Harl();
 
-  void  complain(std::string level);
+  void  complain(const std::string level) const;
 
 private:
-  void  debug_();
-  void  info_();
-  void  warning_();
-  void  error_();
+  void  debug_() const;
+  void  info_() const;
+  void  warning_() const;
+  void  error_() const;
 };
 
 #endif

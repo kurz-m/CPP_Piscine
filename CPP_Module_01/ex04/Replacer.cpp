@@ -12,7 +12,7 @@ Replacer::Replacer(std::string filename, std::string find, std::string replace)
 
 Replacer::~Replacer() {}
 
-void  Replacer::set_outfile(std::string filename)
+void  Replacer::set_outfile(const std::string& filename)
 {
   outfile_ = filename + ".replace";
 }
@@ -22,7 +22,7 @@ void Replacer::read_file(std::ifstream& istrm)
   buff_.assign(std::istreambuf_iterator<char>(istrm), std::istreambuf_iterator<char>());
 }
 
-std::string Replacer::create_output()
+std::string Replacer::create_output() const
 {
   size_t    pos = 0;
   size_t    i;

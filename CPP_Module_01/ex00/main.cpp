@@ -1,8 +1,8 @@
 #include "Zombie.hpp"
 
 int main(void) {
-  Zombie* heap_zombie_a;
-  Zombie* heap_zombie_b;
+  const Zombie* heap_zombie_a;
+  const Zombie* heap_zombie_b;
 
   std::cout << "-------------------------------------------------" << std::endl;
   std::cout << "         Creating zombies on the stack           " << std::endl;
