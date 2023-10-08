@@ -14,27 +14,41 @@ std::string to_upper(std::string s)
 
 int main(void)
 {
-  uint8_t max_tries = 0;
+  short max_tries = 0;
   PhoneBook phonebook;
   std::string input;
 
+  std::cout << "Welcome to my awesome phonebook\n"
+            << "Please enter one of the following options:\n"
+            << "ADD | SEARCH | EXIT"
+            << std::endl;
   while (42 && max_tries < 5) {
-    std::cout << "what do you want?: ";
     std::getline(std::cin, input);
     input = to_upper(input);
     if (input.compare("ADD") == 0) {
-
+      phonebook.add_entry();
+      max_tries = 0;
     }
     else if (input.compare("SEARCH") == 0) {
       switch (phonebook.show_overview()) {
         case 0:
           break;
         default:
-          std::cout << "Choose an index between 1 - 8." << std::endl;
-          while (42 && max_tries < 5) {
+          std::cout << "Choose an index between 1 - " << phonebook.get_entries()
+                    << "." << std::endl;
+          while (42) {
             std::getline(std::cin, input);
-            if (std::atoi(input.c_str()) > 0 && std::atoi(input.c_str()) < 9) {
+            if (std::atoi(input.c_str()) > 0
+                && std::atoi(input.c_str()) <= phonebook.get_entries()) {
               phonebook.display_contact(std::atoi(input.c_str()));
+              max_tries = 0;
+            }
+            else {
+              ++max_tries;
+              if (max_tries == 5) {
+                max_tries = 0;
+                break;
+              }
             }
           }
           break;
@@ -45,8 +59,9 @@ int main(void)
     }
     else {
       ++max_tries;
-      std::cout << "Please choose one of the provided options" << std::endl;
-      std::cout << "You have " << 5 - max_tries << " tries left" << std::endl;
+      std::cout << "Please choose one of the provided options\n"
+                << "You have " << 5 - max_tries << " tries left"
+                << std::endl;
     }
   }
   return 0;
