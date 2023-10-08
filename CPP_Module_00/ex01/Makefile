@@ -26,7 +26,8 @@ vpath %.hpp $(INC_DIRS)
 ###############                  SOURCE FILES                     ##############
 ################################################################################
 
-SRCS := main.cpp Contact.cpp # PhoneBook.cpp
+#SRCS := main.cpp Contact.cpp # PhoneBook.cpp
+SRCS := main.cpp # Contact.cpp PhoneBook.cpp
 
 OBJS := $(addprefix $(OBJ_DIR)/, $(SRCS:%.cpp=%.o))
 

@@ -4,16 +4,23 @@
 #include <iostream>
 #include "Contact.hpp"
 
-#define MAX_ENTRY 8
-
 class PhoneBook {
 public:
+  enum {MAX_ENTRY = 8};
+
   PhoneBook();
   ~PhoneBook();
 
+  void  add_entry();
+  int  show_overview() const;
+  void  display_contact(int i) const;
+
 private:
   Contact contact_[MAX_ENTRY];
-  int     index_;
+  int index_;
+  int entries_;
+
+  void  formatted_entries() const;
 };
 
 #endif // PHONEBOOK_HPP_

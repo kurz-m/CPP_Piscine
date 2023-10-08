@@ -6,21 +6,15 @@
 class Contact {
 public:
   Contact(void);
+  Contact(const Contact& contact);
   ~Contact(void);
 
-  std::string get_first_name(void) const;
-  void   set_first_name(std::string first_name);
+  void  create_new(Contact& contact);
 
-  std::string get_last_name(void) const;
+  void  set_first_name(std::string first_name);
   void  set_last_name(std::string last_name);
-
-  std::string get_nickname(void) const;
   void  set_nickname(std::string nickname);
-
-  std::string get_phone_number(void) const;
   void  set_phone_number(std::string phone_number);
-
-  std::string get_darkest_secret(void) const;
   void  set_darkest_secret(std::string darkest_secret);
 
 private:
