@@ -21,12 +21,20 @@ void  Contact::create_new()
     &darkest_secret_
   };
 
-  std::cout << "This is the entry mask for a new contact\n"
-            << "Please insert your details."
+  std::cout << "|-------------------------------------------|\n|"
+              << center_output_("This is the entry mask for a new contact", 43)
+            << "|\n"
+            << "|" << center_output_("Please insert your details.", 43) << "|\n"
+            << "|" << std::string(43, '-') << "|"
             << std::endl;
   for (int i = 0; i < 5; i++) {
     ask_details_(questions[i], *details_[i]);
   }
+  std::cout << "|-------------------------------------------|\n"
+            << "|" << center_output_(nickname_, 43) << "|\n"
+            << "|" << center_output_(" was added to the phonebook", 43) << "|\n"
+            << "|" << std::string(43, '-') << "|"
+            << std::endl;
 }
 
 void  Contact::ask_details_(const std::string ask, std::string& detail_)
@@ -60,6 +68,15 @@ void  Contact::display_details() const
             << "Phone number: " << phone_number_ << '\n'
             << "Darkest secret: " << darkest_secret_
             << std::endl;
+}
+
+const std::string   Contact::center_output_(const std::string& out, int width) const
+{
+  int   padding = width - out.size();
+  int   padding_left = padding / 2;
+  int   padding_right = padding - padding_left;
+
+  return std::string(padding_left, ' ') + out + std::string(padding_right, ' ');
 }
 
 const std::string Contact::get_first_name() const

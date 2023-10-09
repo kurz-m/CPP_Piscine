@@ -3,6 +3,7 @@
 
 #include <string>
 #include <iostream>
+#include <iomanip>
 
 class Contact {
 public:
@@ -28,6 +29,7 @@ private:
   std::string   phone_number_;
   std::string   darkest_secret_;
 
+  const std::string center_output_(const std::string& out, int width) const;
   void  reset_input_(std::string& input, short& max_tries);
   void  ask_details_(const std::string ask, std::string& detail);
 };

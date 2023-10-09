@@ -63,7 +63,7 @@ void  PhoneBook::formatted_entries_() const
 const std::string PhoneBook::format_(const std::string entry) const
 {
   if (entry.length() > 10) {
-    return entry.substr() + ".";
+    return entry.substr(0, 9) + ".";
   }
   return entry;
 }
