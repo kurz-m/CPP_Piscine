@@ -15,15 +15,15 @@ public:
   void  replace_str();
 
 private:
+  void  set_outfile(const std::string& filename);
+  void  read_file(std::ifstream& istrm);
+  std::string create_output() const;
+
   const std::string infile_;
   const std::string find_;
   const std::string replace_;
   std::string outfile_;
   std::string buff_;
-
-  void  set_outfile(const std::string& filename);
-  void  read_file(std::ifstream& istrm);
-  std::string create_output() const;
 };
 
 #endif

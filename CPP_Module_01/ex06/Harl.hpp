@@ -16,13 +16,13 @@ public:
   void  complain(std::string level);
 
 private:
-  int   complain_level_;
-
   void  debug_();
   void  info_();
   void  warning_();
   void  error_();
   void  filter_();
+
+  int   complain_level_;
 };
 
 #endif

@@ -19,12 +19,12 @@ public:
   int show_overview() const;
 
 private:
+  void  formatted_entries_() const;
+  const std::string format_(const std::string entry) const;
+
   Contact contacts_[MAX_ENTRY];
   int index_;
   int entries_;
-
-  void  formatted_entries_() const;
-  const std::string format_(const std::string entry) const;
 };
 
 #endif // PHONEBOOK_HPP_
