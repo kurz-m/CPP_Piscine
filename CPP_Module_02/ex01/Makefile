@@ -1,4 +1,4 @@
-NAME := ex02
+NAME := fixed
 .DEFAULT_GOAL := all
 CC := c++
 
@@ -27,7 +27,7 @@ vpath %.cpp $(SRC_DIRS)
 ###############                  SOURCE FILES                     ##############
 ################################################################################
 
-SRCS := main.cpp
+SRCS := $(wildcard *.cpp)
 
 OBJS := $(addprefix $(OBJ_DIR)/, $(SRCS:%.cpp=%.o))
 
