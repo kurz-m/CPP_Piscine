@@ -8,15 +8,15 @@
 class Fixed {
 public:
   Fixed();
-  Fixed(const int);
+  Fixed(const int32_t);
   Fixed(const float);
   Fixed(const Fixed&);
   ~Fixed();
 
-  int get_raw_bits() const;
-  void  set_raw_bits(const int raw);
+  int32_t get_raw_bits() const;
+  void  set_raw_bits(const int32_t raw);
   float to_float() const;
-  int to_int() const;
+  int32_t to_int() const;
   static Fixed& min(Fixed& lhs, Fixed& rhs);
   static const Fixed& min(const Fixed& lhs, const Fixed& rhs);
   static Fixed& max(Fixed& lhs, Fixed& rhs);
@@ -33,11 +33,16 @@ public:
   Fixed operator-(const Fixed&) const;
   Fixed operator*(const Fixed&) const;
   Fixed operator/(const Fixed&) const;
-
+  Fixed&  operator++();
+  Fixed  operator++(int);
+  Fixed&  operator--();
+  Fixed  operator--(int);
 
 private:
-  int fixed_point_;
-  static const int  fractal_bits_ = 8;
+  static Fixed from_raw_bits(int32_t bits);
+
+  int32_t fixed_point_;
+  static const int32_t  fractal_bits_ = 8;
 };
 
 std::ostream& operator<<(std::ostream&, const Fixed& rhs);
