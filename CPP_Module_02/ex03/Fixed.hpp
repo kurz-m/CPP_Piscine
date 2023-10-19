@@ -11,6 +11,7 @@ public:
   Fixed(const int32_t);
   Fixed(const float);
   Fixed(const Fixed&);
+  Fixed& operator=(const Fixed&);
   ~Fixed();
 
   int32_t get_raw_bits() const;
@@ -22,7 +23,6 @@ public:
   static Fixed& max(Fixed& lhs, Fixed& rhs);
   static const Fixed& max(const Fixed& lhs, const Fixed& rhs);
 
-  Fixed& operator=(const Fixed&);
   bool  operator>(const Fixed&) const;
   bool  operator<(const Fixed&) const;
   bool  operator>=(const Fixed&) const;
