@@ -16,10 +16,9 @@ Fixed::Fixed(const float f)
   std::cout << "Float constructor called" << std::endl;
 }
 
-Fixed::Fixed(const Fixed& fixed)
+Fixed::Fixed(const Fixed& fixed) : fixed_point_(fixed.fixed_point_)
 {
   std::cout << "Copy constructor called" << std::endl;
-  *this = fixed;
 }
 
 Fixed& Fixed::operator=(const Fixed& rhs)
@@ -54,6 +53,31 @@ float Fixed::to_float() const
 int Fixed::to_int() const
 {
   return fixed_point_ >> fractal_bits_;
+}
+
+bool Fixed::operator>(const Fixed& rhs) const
+{
+  return fixed_point_ > rhs.get_raw_bits();
+}
+
+bool Fixed::operator<(const Fixed& rhs) const
+{
+  return fixed_point_ < rhs.get_raw_bits();
+}
+
+bool Fixed::operator>=(const Fixed& rhs) const
+{
+  return fixed_point_ >= rhs.get_raw_bits();
+}
+
+bool Fixed::operator<=(const Fixed& rhs) const
+{
+  return fixed_point_ <= rhs.get_raw_bits();
+}
+
+bool Fixed::operator==(const Fixed& rhs) const
+{
+  return fixed_point_ == rhs.get_raw_bits();
 }
 
 std::ostream& operator<<(std::ostream& o, const Fixed& rhs)

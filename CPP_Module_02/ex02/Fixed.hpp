@@ -11,13 +11,29 @@ public:
   Fixed(const int);
   Fixed(const float);
   Fixed(const Fixed&);
-  Fixed& operator=(const Fixed&);
   ~Fixed();
 
   int get_raw_bits() const;
   void  set_raw_bits(const int raw);
   float to_float() const;
   int to_int() const;
+  static Fixed& min(Fixed& lhs, Fixed& rhs);
+  static const Fixed& min(const Fixed& lhs, const Fixed& rhs);
+  static Fixed& max(Fixed& lhs, Fixed& rhs);
+  static const Fixed& max(const Fixed& lhs, const Fixed& rhs);
+
+  Fixed& operator=(const Fixed&);
+  bool  operator>(const Fixed&) const;
+  bool  operator<(const Fixed&) const;
+  bool  operator>=(const Fixed&) const;
+  bool  operator<=(const Fixed&) const;
+  bool  operator==(const Fixed&) const;
+  bool  operator!=(const Fixed&) const;
+  Fixed operator+(const Fixed&) const;
+  Fixed operator-(const Fixed&) const;
+  Fixed operator*(const Fixed&) const;
+  Fixed operator/(const Fixed&) const;
+
 
 private:
   int fixed_point_;
