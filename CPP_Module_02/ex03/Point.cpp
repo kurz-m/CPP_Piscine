@@ -8,6 +8,8 @@ Point::Point(const Fixed x, const Fixed y) : x_(x), y_(y) {}
 
 Point::Point(const Point& rhs) : x_(rhs.x_), y_(rhs.y_) {}
 
+Point::~Point() {}
+
 Point&  Point::operator=(const Point& rhs)
 {
   if (this != &rhs) {
