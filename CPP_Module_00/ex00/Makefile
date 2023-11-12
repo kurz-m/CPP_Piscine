@@ -35,7 +35,7 @@ CFLAGS ?= -Wextra -Wall -Werror -std=c++98 -MMD -MP
 
 all: $(NAME)
 
-$(NAME): $(OBJS) | $(LIBFT)
+$(NAME): $(OBJS)
 	@$(LOG) "Linking object files to $@"
 	@$(CC) $^ $(LDFLAGS) -o $@
 
