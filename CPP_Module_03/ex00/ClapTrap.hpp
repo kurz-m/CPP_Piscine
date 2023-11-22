@@ -4,9 +4,6 @@
 #include <iostream>
 #include <cstdlib>
 
-#define NO_ENERGY 0
-#define NO_HIT 1
-
 class ClapTrap {
 public:
   ClapTrap();
@@ -22,9 +19,9 @@ public:
 
 private:
   std::string name_;
-  int32_t hit_points_;
-  int32_t energy_points_;
-  int32_t attack_dmg_;
+  int hit_points_;
+  int energy_points_;
+  int attack_dmg_;
 };
 
 #endif
