@@ -40,7 +40,7 @@ LDFLAGS :=
 
 all: $(NAME)
 
-$(NAME): $(OBJS) | $(LIBFT)
+$(NAME): $(OBJS)
 	@$(LOG) "Linking object files to $@"
 	@$(CC) $^ $(LDFLAGS) -o $@
 

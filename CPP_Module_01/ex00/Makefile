@@ -40,7 +40,7 @@ LDFLAGS :=
 
 all: $(NAME)
 
-$(NAME): $(OBJS) | $(LIBFT)
+$(NAME): $(OBJS)
 	@$(LOG) "Linking object files to $@"
 	@$(CC) $^ $(LDFLAGS) -o $@
 
@@ -73,6 +73,6 @@ fclean: clean
 
 re: fclean all
 
--include $(OBJS:%.o=%.d)
+-include $(OBJS:$(OBJ_DIR)/%.o=$(OBJ_DIR)/%.d)
 
 .PHONY: all fclean clean re
