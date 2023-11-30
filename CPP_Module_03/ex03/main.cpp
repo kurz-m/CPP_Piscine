@@ -1,30 +1,14 @@
-#include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
 
 int main()
 {
-  {
-    FragTrap part = FragTrap("Dieter");
-    FragTrap assignee;
+  DiamondTrap one = DiamondTrap("Herbert");
+  DiamondTrap two;
 
-    assignee = part;
-
-    assignee.attack("omg Dieter");
-    assignee.take_damage(110);
-    assignee.be_repaired(20);
-
-    part.attack("HP");
-    part.take_damage(30);
-    part.be_repaired(4);
-    part.attack("Forest");
-    part.take_damage(74);
-    part.attack("Nothing");
-  }
-
-  {
-
-  }
-
-
+  two = one;
+  one.attack("Spaceship");
+  two.ClapTrap::attack("Yoda");
+  one.be_repaired(4);
 
   return EXIT_SUCCESS;
 }

@@ -1,4 +1,4 @@
-NAME := fragtrap
+NAME := DiamondTrap
 .DEFAULT_GOAL := all
 CC := c++
 
