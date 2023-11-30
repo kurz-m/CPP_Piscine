@@ -41,7 +41,7 @@ public:
 private:
   static Fixed from_raw_bits(int32_t bits);
 
-  int32_t fixed_point_;
+  int32_t fixed_format_;
   static const int32_t  fractal_bits_ = 8;
 };
 
