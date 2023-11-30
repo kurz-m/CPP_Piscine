@@ -13,7 +13,7 @@ ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name), guard_state_(0)
   hit_points_ = 100;
   energy_points_ = 50;
   attack_dmg_ = 20;
-  std::cout << "ScavTrap constructor called: " << name << std::endl;
+  std::cout << "ScavTrap string constructor called: " << name << std::endl;
 }
 
 ScavTrap& ScavTrap::operator=(const ScavTrap& rhs)
@@ -28,25 +28,27 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& rhs)
   return *this;
 }
 
-ScavTrap::~ScavTrap()
-{
-  std::cout << "ScavTrap destructor called: " << name_ << std::endl;
-}
-
 void  ScavTrap::attack(const std::string &target)
 {
-  unsigned short check = hit_points_ <= 0 || energy_points_ <= 0;
+  unsigned short check = hit_points_ <= 0 ? 0 : energy_points_ <= 0 ? 1 : 2;
+
   switch (check) {
-    case 1:
-      std::cout << "ScavTrap " << name_
-                << " has no energy left to attack.\n";
-      break;
-    default:
-      --energy_points_;
-      std::cout << "ScavTrap " << name_ << " attacks " << target
-                << " causing " << attack_dmg_ << " dmg.\n"
-                << name_ << " has " << energy_points_ << " energy left.\n"
-                << std::endl;
+  case 0:
+    std::cout << "ScavTrap " << name_
+              << " wants to attack, but"
+              << " does not live anymore.\n";
+    break;
+  case 1:
+    std::cout << "ScavTrap " << name_
+              << " has no energy left to attack.\n";
+    break;
+  default:
+    --energy_points_;
+    std::cout << "ScavTrap " << name_ << " attacks " << target
+              << " causing " << attack_dmg_ << " dmg.\n"
+              << name_ << " has " << energy_points_ << " energy left.\n"
+              << std::endl;
+    break;
   }
 }
 
