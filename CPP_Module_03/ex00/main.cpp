@@ -3,6 +3,7 @@
 int main()
 {
   ClapTrap trap = ClapTrap("Herbert");
+  ClapTrap part = ClapTrap("NoDMG");
 
   trap.attack("Brunhilde");
   trap.take_damage(3);
@@ -25,6 +26,9 @@ int main()
   trap.be_repaired(2);
 
   trap.take_damage(8);
+
+  part.take_damage(10);
+  part.attack("what");
 
   return EXIT_SUCCESS;
 }
