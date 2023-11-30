@@ -4,6 +4,7 @@ int main()
 {
   {
     ScavTrap part = ScavTrap("Dieter");
+    ScavTrap clone = ScavTrap(part);
 
     part.attack("HP");
     part.take_damage(30);
@@ -12,10 +13,17 @@ int main()
     part.guard_gate();
     part.take_damage(74);
     part.attack("Nothing");
+
+    clone.attack("Dobby");
   }
 
   {
-    ClapTrap trap = ClapTrap("Herbert");
+    std::cout << "\n\n";
+    ScavTrap trap = ScavTrap("Herbert");
+    ScavTrap assignee;
+
+    assignee = trap;
+
     trap.attack("Brunhilde");
     trap.take_damage(3);
     trap.be_repaired(1);
@@ -37,6 +45,8 @@ int main()
     trap.be_repaired(2);
 
     trap.take_damage(8);
+
+    assignee.be_repaired(10);
 }
 
 
