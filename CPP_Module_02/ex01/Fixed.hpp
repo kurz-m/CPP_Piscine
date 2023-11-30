@@ -20,7 +20,7 @@ public:
   int to_int() const;
 
 private:
-  int fixed_point_;
+  int fixed_format_;
   static const int  fractal_bits_ = 8;
 };
 

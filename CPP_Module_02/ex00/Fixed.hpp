@@ -15,7 +15,7 @@ public:
   void  set_raw_bits(const int raw);
 
 private:
-  int fixed_point_;
+  int fixed_format_;
   static const int  fractal_bits_ = 8;
 };
 
