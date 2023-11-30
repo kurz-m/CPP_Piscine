@@ -28,6 +28,11 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& rhs)
   return *this;
 }
 
+ScavTrap::~ScavTrap()
+{
+  std::cout << "ScavTrap destructor called: " << name_ << std::endl;
+}
+
 void  ScavTrap::attack(const std::string &target)
 {
   unsigned short check = hit_points_ <= 0 ? 0 : energy_points_ <= 0 ? 1 : 2;
@@ -55,5 +60,5 @@ void  ScavTrap::attack(const std::string &target)
 void  ScavTrap::guard_gate()
 {
   guard_state_ = 1;
-  std::cout << "ScavTrap " << name_ << " is now in gate keeper mode\n";
+  std::cout << "ScavTrap " << name_ << " is now in gate keeper mode.\n";
 }
