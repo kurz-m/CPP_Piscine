@@ -2,3 +2,4 @@
 -Werror
 -Wextra
 -I.
+-std=c++98
