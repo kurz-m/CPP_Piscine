@@ -39,7 +39,7 @@ public:
   Fixed  operator--(int);
 
 private:
-  static Fixed from_raw_bits(int32_t bits);
+  static Fixed from_raw_bits_(int32_t bits);
 
   int32_t fixed_format_;
   static const int32_t  fractal_bits_ = 8;

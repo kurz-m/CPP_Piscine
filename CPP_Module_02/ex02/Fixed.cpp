@@ -87,26 +87,26 @@ bool Fixed::operator!=(const Fixed& rhs) const
 
 Fixed Fixed::operator+(const Fixed& rhs) const
 {
-  return Fixed::from_raw_bits(fixed_format_ + rhs.get_raw_bits());
+  return Fixed::from_raw_bits_(fixed_format_ + rhs.get_raw_bits());
 }
 
 Fixed Fixed::operator-(const Fixed& rhs) const
 {
-  return Fixed::from_raw_bits(fixed_format_ - rhs.get_raw_bits());
+  return Fixed::from_raw_bits_(fixed_format_ - rhs.get_raw_bits());
 }
 
 Fixed Fixed::operator*(const Fixed& rhs) const
 {
   int64_t raw = static_cast<int64_t>(fixed_format_)
               * static_cast<int64_t>(rhs.get_raw_bits());
-  return Fixed::from_raw_bits(static_cast<int32_t>(raw >> fractal_bits_));
+  return Fixed::from_raw_bits_(static_cast<int32_t>(raw >> fractal_bits_));
 }
 
 Fixed Fixed::operator/(const Fixed& rhs) const
 {
   int64_t raw = (static_cast<int64_t>(fixed_format_) << fractal_bits_)
               / static_cast<int64_t>(rhs.get_raw_bits());
-  return Fixed::from_raw_bits(raw);
+  return Fixed::from_raw_bits_(raw);
 }
 
 Fixed&  Fixed::operator++()
@@ -155,7 +155,7 @@ const Fixed&  Fixed::max(const Fixed& lhs, const Fixed& rhs)
   return lhs > rhs ? lhs : rhs;
 }
 
-Fixed Fixed::from_raw_bits(int32_t raw)
+Fixed Fixed::from_raw_bits_(int32_t raw)
 {
   Fixed pre;
   pre.fixed_format_ = raw;
