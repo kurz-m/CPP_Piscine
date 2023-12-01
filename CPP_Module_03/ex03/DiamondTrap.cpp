@@ -6,7 +6,8 @@ DiamondTrap::DiamondTrap()
   hit_points_ = FragTrap::hit_points_;
   energy_points_ = ScavTrap::energy_points_;
   attack_dmg_ = FragTrap::attack_dmg_;
-  std::cout << "DiamondTrap default constructor called: " << name_ << std::endl;
+  std::cout << "DiamondTrap default constructor called: " << name_
+            << std::endl;
 }
 
 DiamondTrap::DiamondTrap(const std::string& name)
@@ -29,7 +30,8 @@ DiamondTrap::DiamondTrap(const DiamondTrap& rhs)
 
 DiamondTrap& DiamondTrap::operator=(const DiamondTrap& rhs)
 {
-  std::cout << "DiamondTrap copy assignment operator called: " << rhs.name_ << std::endl;
+  std::cout << "DiamondTrap copy assignment operator called: "
+            << rhs.name_ << std::endl;
   if (this != &rhs) {
     hit_points_ = rhs.hit_points_;
     energy_points_ = rhs.energy_points_;
@@ -43,4 +45,10 @@ DiamondTrap& DiamondTrap::operator=(const DiamondTrap& rhs)
 DiamondTrap::~DiamondTrap()
 {
   std::cout << "DiamondTrap destructor called: " << name_ << std::endl;
+}
+
+void  DiamondTrap::who_am_I()
+{
+  std::cout << "My real name is " << name_ << ".\n"
+            << "ClapTrap's name is " << ClapTrap::name_ << "." <<  std::endl;
 }

@@ -13,7 +13,7 @@ public:
   ~DiamondTrap();
 
   using ScavTrap::attack;
-  void  guard_gate();
+  void  who_am_I();
 
 private:
   std::string name_;
