@@ -31,7 +31,7 @@ Animal::~Animal()
 
 void  Animal::make_sound() const
 {
-  std::cout << "What sound makes an arbitrary animal?" << std::endl;
+  std::cout << "(arbitrary animal sound)" << std::endl;
 }
 
 std::string Animal::get_type() const
