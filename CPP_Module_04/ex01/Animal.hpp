@@ -4,6 +4,8 @@
 #include <cstdlib>
 #include <iostream>
 
+#include "utils.hpp"
+
 class Animal {
 public:
   Animal();
