@@ -1,4 +1,4 @@
-NAME := claptrap
+NAME := animal
 .DEFAULT_GOAL := all
 CC := c++
 

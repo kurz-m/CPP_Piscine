@@ -1,24 +1,23 @@
-#ifndef DOG_HPP_
-# define DOG_HPP_
+#ifndef CAT_HPP_
+# define CAT_HPP_
 
 #include <cstdlib>
 #include <iostream>
 
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 #include "Brain.hpp"
 #include "utils.hpp"
 
-class Dog : public Animal {
+class Cat : public AAnimal {
 public:
-  Dog();
-  Dog(const Dog&);
-  Dog& operator=(const Dog&);
-  ~Dog();
+  Cat();
+  Cat(const Cat&);
+  Cat& operator=(const Cat&);
+  ~Cat();
 
   virtual void  make_sound() const;
   void  create_idea(const std::string&);
   void  list_ideas() const;
-  void  print_addr() const;
 
 private:
   Brain*  brain_;

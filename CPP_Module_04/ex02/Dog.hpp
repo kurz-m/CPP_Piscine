@@ -4,11 +4,11 @@
 #include <cstdlib>
 #include <iostream>
 
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 #include "Brain.hpp"
 #include "utils.hpp"
 
-class Dog : public Animal {
+class Dog : public AAnimal {
 public:
   Dog();
   Dog(const Dog&);
