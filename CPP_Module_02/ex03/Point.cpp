@@ -12,6 +12,7 @@ Point::~Point() {}
 
 Point&  Point::operator=(const Point& rhs)
 {
+  std::cout << "Point copy assignment" << std::endl;
   if (this != &rhs) {
     *const_cast<Fixed*>(&x_) = rhs.x_;
     *const_cast<Fixed*>(&y_) = rhs.y_;

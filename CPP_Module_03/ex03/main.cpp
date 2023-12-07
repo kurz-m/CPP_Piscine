@@ -2,10 +2,11 @@
 
 int main()
 {
-  DiamondTrap one = DiamondTrap("Herbert");
+  DiamondTrap one("Herbert");
   DiamondTrap two;
 
   two = one;
+  one.who_am_I();
   one.attack("Spaceship");
   two.ClapTrap::attack("Yoda");
   one.be_repaired(4);
