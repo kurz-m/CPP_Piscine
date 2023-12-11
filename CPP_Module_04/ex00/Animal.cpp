@@ -1,23 +1,24 @@
 #include "Animal.hpp"
+#include "utils.hpp"
 
 Animal::Animal() : type_("base")
 {
-  std::cout << "Animal constructor called." << std::endl;
+  debug_print("Animal constructor called.", BLUE);
 }
 
 Animal::Animal(const std::string& type) : type_(type)
 {
-  std::cout << "Animal string constructor called." << std::endl;
+  debug_print("Animal string constructor called.", BLUE);
 }
 
 Animal::Animal(const Animal& rhs) : type_(rhs.type_)
 {
-  std::cout << "Animal copy constructor called." << std::endl;
+  debug_print("Animal copy constructor called.", BLUE);
 }
 
 Animal& Animal::operator=(const Animal& rhs)
 {
-  std::cout << "Animal copy assignment operator called." << std::endl;
+  debug_print("Animal copy assignment operator called.", BLUE);
   if (this != &rhs) {
     type_ = rhs.type_;
   }
@@ -26,12 +27,12 @@ Animal& Animal::operator=(const Animal& rhs)
 
 Animal::~Animal()
 {
-  std::cout << "Animal destructor called." << std::endl;
+  debug_print("Animal destructor called.", RED);
 }
 
 void  Animal::make_sound() const
 {
-  std::cout << "(arbitrary animal sound)" << std::endl;
+  debug_print("(arbitrary animal sound)", GREEN);
 }
 
 std::string Animal::get_type() const

@@ -1,18 +1,19 @@
 #include "Dog.hpp"
+#include "utils.hpp"
 
 Dog::Dog() : Animal("dog")
 {
-  std::cout << "Dog constructor called." << std::endl;
+  debug_print("Dog constructor called.", CYAN);
 }
 
 Dog::Dog(const Dog& rhs) : Animal(rhs.type_)
 {
-  std::cout << "Dog copy constructor called." << std::endl;
+  debug_print("Dog copy constructor called.", CYAN);
 }
 
 Dog& Dog::operator=(const Dog& rhs)
 {
-  std::cout << "Dog copy assignment operator called." << std::endl;
+  debug_print("Dog copy assignment operator called.", CYAN);
   if (this != &rhs) {
     type_ = rhs.type_;
   }
@@ -21,10 +22,10 @@ Dog& Dog::operator=(const Dog& rhs)
 
 Dog::~Dog()
 {
-  std::cout << "Dog destructor called." << std::endl;
+  debug_print("Dog destructor called.", RED);
 }
 
 void  Dog::make_sound() const
 {
-  std::cout << "Wuff wuff." << std::endl;
+  debug_print("Wuff wuff.", GREEN);
 }

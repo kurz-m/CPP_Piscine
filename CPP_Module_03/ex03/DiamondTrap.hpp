@@ -12,7 +12,7 @@ public:
   DiamondTrap& operator=(const DiamondTrap& rhs);
   ~DiamondTrap();
 
-  using ScavTrap::attack;
+  void  attack(const std::string& target);
   void  who_am_I();
 
 private:
