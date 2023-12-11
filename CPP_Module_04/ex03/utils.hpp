@@ -18,7 +18,5 @@ enum debug_t {
 };
 
 void  log_level(const std::string& fmt, const std::string& color, debug_t level);
-void  info_print(const std::string& fmt, const std::string& color);
-void  debug_print(const std::string& fmt, const std::string& color);
 
 #endif
