@@ -11,12 +11,12 @@
 #define CYAN "\033[1;36m"   // Dog
 #define GREEN "\033[1;32m"
 
-enum debug_t {
+enum debug_e {
   INFO,
   DEBUG,
   ERROR,
 };
 
-void  log_level(const std::string& fmt, const std::string& color, debug_t level);
+void  log_level(const std::string& fmt, const std::string& color, debug_e level);
 
 #endif
