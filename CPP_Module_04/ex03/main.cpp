@@ -3,6 +3,7 @@
 #include "Cure.hpp"
 #include "Ice.hpp"
 #include "Character.hpp"
+#include "utils.hpp"
 
 void test_mand() {
   IMateriaSource *src = new MateriaSource();
@@ -51,15 +52,17 @@ void test_extended() {
 int main(int argc, char **argv) {
   if (argc > 1)
   {
-    std::string arg = argv[1];
-    if (arg == "1") {
+    int test = std::string(argv[1]).compare("1") == 0 ? 0 :
+                std::string(argv[1]).compare("2") == 0 ? 1 : 2;
+    switch (test) {
+    case 0:
       test_mand();
-    }
-    else if (arg == "2") {
+      break;
+    case 1:
       test_extended();
-    }
-    else {
-      std::cerr << "unrecognized option." << std::endl;
+      break;
+    default:
+      log_level("unknown test option.", RED, DEBUG);
     }
   }
   else {
