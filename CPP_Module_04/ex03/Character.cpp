@@ -68,7 +68,7 @@ void  Character::equip(AMateria *materia)
     return;
   }
   for (int i = 0; i < bag_size_; i++) {
-    if (bag_[i] != NULL) {
+    if (bag_[i] == NULL) {
       bag_[i] = materia;
       return;
     }
@@ -100,7 +100,7 @@ void  Character::discard_materia_(AMateria* materia)
 
 }
 
-void  Character::use(int idx, Character &target)
+void  Character::use(int idx, ICharacter& target)
 {
   if (idx > bag_size_ - 1 || idx < 0) {
     log_level("Not a valid index!", MAGENTA, DEBUG);

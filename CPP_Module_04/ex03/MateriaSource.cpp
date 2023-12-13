@@ -53,8 +53,10 @@ void  MateriaSource::learn_materia(AMateria *materia)
 AMateria* MateriaSource::create_materia(const std::string &type)
 {
   for (int i = 0; i < max_templates_; i++) {
-    if (templates_[i]->get_type() == type) {
-      return templates_[i]->clone();
+    if (templates_[i] != NULL) {
+      if (templates_[i]->get_type() == type) {
+        return templates_[i]->clone();
+      }
     }
   }
   return NULL;

@@ -1,6 +1,6 @@
 #include "utils.hpp"
 
-void  log_level(const std::string& fmt, const std::string& color, debug_t level)
+void  log_level(const std::string& fmt, const std::string& color, debug_e level)
 {
   switch (level) {
     case INFO:

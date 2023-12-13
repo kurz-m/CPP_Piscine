@@ -14,7 +14,7 @@ public:
   const std::string& get_name() const;
   void  equip(AMateria* materia);
   void  unequip(int idx);
-  void  use(int idx, Character& target);
+  void  use(int idx, ICharacter& target);
 
 private:
   enum {bag_size_ = 4};

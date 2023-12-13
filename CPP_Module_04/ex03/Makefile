@@ -1,4 +1,4 @@
-NAME := claptrap
+NAME := character
 .DEFAULT_GOAL := all
 CC := c++
 

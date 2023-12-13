@@ -1,7 +1,7 @@
 #include "Cure.hpp"
 #include "utils.hpp"
 
-Cure::Cure() : AMateria("ice") {}
+Cure::Cure() : AMateria("cure") {}
 
 Cure::Cure(const Cure& rhs) : AMateria(rhs) {}
 
