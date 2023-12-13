@@ -13,6 +13,10 @@ public:
   ClapTrap& operator=(const ClapTrap& rhs);
   ~ClapTrap();
 
+  const std::string& get_name() const;
+  int get_hit_points() const;
+  int get_energy_points() const;
+  int get_attack_dmg() const;
   void  attack(const std::string& target);
   void  take_damage(unsigned int amount);
   void  be_repaired(unsigned int amount);
@@ -23,5 +27,7 @@ protected:
   int energy_points_;
   int attack_dmg_;
 };
+
+std::ostream& operator<<(std::ostream& o, const ClapTrap& C);
 
 #endif

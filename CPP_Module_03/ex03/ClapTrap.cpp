@@ -79,7 +79,7 @@ void  ClapTrap::attack(const std::string &target)
 
 void  ClapTrap::take_damage(unsigned int amount)
 {
-  std::cout << name_ << " takes " << amount <<" dmg\n";
+  std::cout << name_ << " takes " << amount <<" dmg.\n";
   hit_points_ -= amount;
 
   unsigned short check = hit_points_ <= 0 ? 0 : 1;
@@ -119,4 +119,32 @@ void  ClapTrap::be_repaired(unsigned int amount)
               << std::endl;
     break;
   }
+}
+
+const std::string& ClapTrap::get_name() const
+{
+  return name_;
+}
+
+int ClapTrap::get_hit_points() const
+{
+  return hit_points_;
+}
+
+int ClapTrap::get_energy_points() const
+{
+  return energy_points_;
+}
+
+int ClapTrap::get_attack_dmg() const
+{
+  return attack_dmg_;
+}
+
+std::ostream& operator<<(std::ostream& o, const ClapTrap& C)
+{
+  return o << C.get_name() << " has:\n"
+           << "\t" << C.get_hit_points() << " hit points\n"
+           << "\t" << C.get_energy_points() << " energy points\n"
+           << "\t" << C.get_attack_dmg() << " attack dmg\n";
 }

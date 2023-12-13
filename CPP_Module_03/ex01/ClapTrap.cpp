@@ -79,7 +79,7 @@ void  ClapTrap::attack(const std::string &target)
 
 void  ClapTrap::take_damage(unsigned int amount)
 {
-  std::cout << name_ << " takes " << amount <<" dmg\n";
+  std::cout << name_ << " takes " << amount <<" dmg.\n";
   hit_points_ -= amount;
 
   unsigned short check = hit_points_ <= 0 ? 0 : 1;

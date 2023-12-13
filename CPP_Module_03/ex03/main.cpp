@@ -8,7 +8,9 @@ int main()
   two = one;
   one.who_am_I();
   one.attack("Spaceship");
-  two.ClapTrap::attack("Yoda");
+
+  std::cout << one;
+
   one.be_repaired(4);
   one.high_five_guys();
   two.high_five_guys();
