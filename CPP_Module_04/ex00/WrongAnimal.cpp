@@ -1,6 +1,6 @@
 #include "WrongAnimal.hpp"
 
-WrongAnimal::WrongAnimal() : type_("base")
+WrongAnimal::WrongAnimal() : type_("wrong_base")
 {
   std::cout << "WrongAnimal constructor called." << std::endl;
 }

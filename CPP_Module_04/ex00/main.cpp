@@ -20,6 +20,8 @@ int main()
   std::cout << "What sound makes the " << meta->get_type() << "?\n";
   meta->make_sound();
 
+  std::cout << "Sound of the class " << base.get_type() << "?\n";
+  base.make_sound();
 
   delete cat;
   delete dog;
