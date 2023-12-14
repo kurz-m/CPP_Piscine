@@ -36,6 +36,14 @@ void  test_deep()
 
 }
 
+void  test_copy_assignment()
+{
+  Cat jerry;
+  Cat clone;
+
+  clone = jerry;
+}
+
 void  test_single_idea()
 {
   Dog pluto;
@@ -44,12 +52,19 @@ void  test_single_idea()
   pluto.list_ideas();
 }
 
+void  check_leaks()
+{
+  system("leaks animal");
+}
+
 int main(int argc, char **argv) {
+  atexit(check_leaks);
   if (argc > 1)
   {
     int test = std::string(argv[1]).compare("1") == 0 ? 0 :
                 std::string(argv[1]).compare("2") == 0 ? 1 :
-                std::string(argv[1]).compare("3") == 0 ? 2 : 100;
+                std::string(argv[1]).compare("3") == 0 ? 2 :
+                std::string(argv[1]).compare("4") == 0 ? 3 : 100;
     switch (test) {
     case 0:
       test_pdf();
@@ -59,6 +74,9 @@ int main(int argc, char **argv) {
       break;
     case 2:
       test_single_idea();
+      break;
+    case 3:
+      test_copy_assignment();
       break;
     default:
       log_level("unknown test option.", RED, DEBUG);
