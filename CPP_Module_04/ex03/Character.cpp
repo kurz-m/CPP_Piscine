@@ -73,6 +73,7 @@ void  Character::equip(AMateria *materia)
       return;
     }
   }
+  delete materia;
   log_level("Bag is full!", MAGENTA, DEBUG);
 }
 

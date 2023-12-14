@@ -47,6 +47,7 @@ void  MateriaSource::learn_materia(AMateria *materia)
       return;
     }
   }
+  delete materia;
   log_level("Template storage is full!", RED, ERROR);
 }
 
