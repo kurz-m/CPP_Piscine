@@ -32,7 +32,7 @@ Brain::~Brain()
 void  Brain::create_idea(const std::string& idea)
 {
   if (curr_idea < BRAIN_SIZE) {
-    std::cout << "Added " << idea << " as an idea to the brain." << std::endl;
+    std::cout << "Added '" << idea << "' as an idea to the brain." << std::endl;
     ideas_[curr_idea++] = idea;
   }
   else {

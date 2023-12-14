@@ -65,12 +65,6 @@ void test_materia() {
   c.equip(tmp);
   tmp = src.create_materia("ice");
   c.equip(tmp);
-  tmp = src.create_materia("cure");
-  c.equip(tmp);
-  tmp = src.create_materia("ice");
-  c.equip(tmp);
-  tmp = src.create_materia("cure");
-  c.equip(tmp);
 
   Character e(c);
   e.use(0, c);
@@ -80,9 +74,6 @@ void test_materia() {
 void test_capacity() {
   MateriaSource src;
   src.learn_materia(new Ice());
-  src.learn_materia(new Cure());
-  src.learn_materia(new Ice());
-  src.learn_materia(new Cure());
   src.learn_materia(new Cure());
 
   Character c("bob");
@@ -107,6 +98,9 @@ void test_capacity() {
   Character e(c);
   e.use(0, c);
   e.use(1, c);
+  e.use(2, c);
+  e.use(3, c);
+  e.use(4, c);
 }
 
 void  check_leaks()

@@ -13,4 +13,12 @@
 
 void  debug_print(const std::string& fmt, const std::string& color);
 
+enum debug_e {
+  INFO,
+  DEBUG,
+  ERROR,
+};
+
+void  log_level(const std::string& fmt, const std::string& color, debug_e level);
+
 #endif

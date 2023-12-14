@@ -28,6 +28,7 @@ vpath %.cpp $(SRC_DIRS)
 ################################################################################
 
 SRCS := $(wildcard *.cpp)
+SRCS := $(filter-out wrong-main.cpp, $(SRCS))
 
 OBJS := $(addprefix $(OBJ_DIR)/, $(SRCS:%.cpp=%.o))
 
@@ -54,6 +55,9 @@ $(OBJ_DIR):
 
 debug: CFLAGS += -g
 debug: fclean all
+
+wrong:
+	@$(MAKE) re SRCS="$(filter-out main.cpp,$(SRCS)) wrong-main.cpp"
 
 clean:
 	@if [ -d "$(OBJ_DIR)" ]; then \
