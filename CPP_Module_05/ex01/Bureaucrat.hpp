@@ -6,6 +6,8 @@
 #include <iostream>
 #include <string>
 
+class Form;
+
 class Bureaucrat {
 public:
   Bureaucrat();
@@ -18,6 +20,8 @@ public:
   unsigned int  get_grade() const;
   void  improve_grade();
   void  lower_grade();
+
+  void  sign_form(Form& F);
 
   class GradeTooHighException: public std::exception {
     virtual const char* what() const throw();

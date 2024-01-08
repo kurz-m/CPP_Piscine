@@ -8,7 +8,7 @@ Bureaucrat::Bureaucrat(const std::string& name, unsigned int grade)
   if (grade > 150) {
     throw GradeTooLowException();
   }
-  else if (grade < 1) {
+  if (grade < 1) {
     throw GradeTooHighException();
   }
 }
@@ -19,7 +19,7 @@ Bureaucrat::Bureaucrat(const Bureaucrat& rhs)
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& rhs)
 {
   if (this != &rhs) {
-    *this = rhs;
+    grade_ = rhs.grade_;
   }
   return *this;
 }
@@ -54,12 +54,12 @@ void  Bureaucrat::lower_grade()
 
 const char* Bureaucrat::GradeTooHighException::what() const throw()
 {
-  return "grade is too high!";
+  return "Grade is too high!";
 }
 
 const char* Bureaucrat::GradeTooLowException::what() const throw()
 {
-  return "grade is too low!";
+  return "Grade is too low!";
 }
 
 std::ostream& operator<<(std::ostream& o, const Bureaucrat& B)
