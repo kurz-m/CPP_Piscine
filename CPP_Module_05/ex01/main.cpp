@@ -32,16 +32,32 @@ void  test_low_grade()
   low.sign_form(best);
 }
 
-void  test_wrong_low_form()
+void  test_low_sign_form()
 {
+  log_level("Sign grade of Form is to low.", TEST);
   Bureaucrat  generic("generic", 42);
-  Form  wrong("Form e42", false, 170, 170);
+  Form  wrong("Form e42", false, 170, 42);
 }
 
-void  test_wrong_high_form()
+void  test_high_sign_form()
 {
+  log_level("Sign grade of Form is to high.", TEST);
   Bureaucrat  generic("generic", 42);
-  Form  wrong("Form e42", false, 0, 170);
+  Form  wrong("Form e42", false, 0, 42);
+}
+
+void  test_low_execution_form()
+{
+  log_level("Sign grade of Form is to low.", TEST);
+  Bureaucrat  generic("generic", 42);
+  Form  wrong("Form e42", false, 42, 170);
+}
+
+void  test_high_execution_form()
+{
+  log_level("Execution grade of Form is to high", TEST);
+  Bureaucrat  generic("generic", 42);
+  Form  wrong("Form e42", false, 42, 0);
 }
 
 int main()
@@ -51,7 +67,7 @@ int main()
   test_low_grade();
 
   try {
-    test_wrong_low_form();
+    test_low_sign_form();
   }
   catch (std::exception& e) {
     log_level("Caught form exception.", ERROR);
@@ -59,25 +75,28 @@ int main()
   }
 
   try {
-    test_wrong_high_form();
+    test_high_sign_form();
   }
   catch (std::exception& e) {
     log_level("Caught form exception.", ERROR);
     std::cout << e.what() << std::endl;
   }
-//   try {
-//     test_high_grade();
-//   }
-//   catch (std::exception& e) {
-//     log_level("Caught exception.", ERROR);
-//     std::cout << e.what() << std::endl;
-//   }
-//   try {
-//     test_improve_grade();
-//   }
-//   catch (std::exception& e) {
-//     log_level("Caught exception.", ERROR);
-//     std::cout << e.what() << std::endl;
-//   }
+
+  try {
+    test_low_execution_form();
+  }
+  catch (std::exception& e) {
+    log_level("Caught form exception.", ERROR);
+    std::cout << e.what() << std::endl;
+  }
+
+  try {
+    test_high_execution_form();
+  }
+  catch (std::exception& e) {
+    log_level("Caught form exception.", ERROR);
+    std::cout << e.what() << std::endl;
+  }
+
   return EXIT_SUCCESS;
 }
