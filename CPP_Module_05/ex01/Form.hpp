@@ -40,4 +40,6 @@ private:
   const unsigned int  execute_grade_;
 };
 
+std::ostream& operator<<(std::ostream& o, const Form& F);
+
 #endif

@@ -63,7 +63,7 @@ void  Bureaucrat::sign_form(Form& F)
   catch (std::exception &e){
     log_level(
         std::string(name_ + " couldn't sign " + F.get_name() +
-        " because " + e.what()), INFO);
+        " because its " + e.what()), INFO);
   }
 }
 

@@ -83,8 +83,8 @@ const char* Form::AlreadySigned::what() const throw()
 std::ostream& operator<<(std::ostream& o, const Form& F)
 {
   return o << "Form:\t\t" << F.get_name()
-           << "Signed?:\t\t" << F.get_signature()
-           << "Sign grade:\t\t" << F.get_sign_grade()
-           << "Exec grade:\t\t" << F.get_execute_grade()
+           << "\nSigned?:\t" << F.get_signature()
+           << "\nSign grade:\t" << F.get_sign_grade()
+           << "\nExec grade:\t" << F.get_execute_grade()
            << std::endl;
 }
