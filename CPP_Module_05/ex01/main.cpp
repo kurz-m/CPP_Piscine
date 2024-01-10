@@ -74,6 +74,7 @@ void  test_high_execution_form()
 
 int main()
 {
+  log_level_color("Start testing!\n", MAGENTA, INFO);
   test_regular();
 
   test_low_grade();

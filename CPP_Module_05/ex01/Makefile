@@ -22,6 +22,7 @@ SRC_DIRS := .
 # Tell the Makefile where headers and source files are
 vpath %.hpp $(INC_DIRS)
 vpath %.cpp $(SRC_DIRS)
+# define a variable to run the tests
 
 ################################################################################
 ###############                  SOURCE FILES                     ##############
@@ -73,6 +74,9 @@ fclean: clean
 
 re: fclean all
 
+test: all
+	@./$(NAME)
+
 -include $(OBJS:$(OBJ_DIR)/%.o=$(OBJ_DIR)/%.d)
 
-.PHONY: all fclean clean re
+.PHONY: all fclean clean re test
