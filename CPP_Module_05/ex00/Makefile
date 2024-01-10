@@ -73,6 +73,9 @@ fclean: clean
 
 re: fclean all
 
+test: all
+	@./$(NAME)
+
 -include $(OBJS:$(OBJ_DIR)/%.o=$(OBJ_DIR)/%.d)
 
-.PHONY: all fclean clean re
+.PHONY: all fclean clean re test
