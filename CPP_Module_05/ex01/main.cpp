@@ -21,6 +21,18 @@ void  test_regular()
   std::cout << yep;
 }
 
+void  test_bureaucrat_signing()
+{
+  log_level("Bureaucrat member function 'sign_form'.", TEST);
+  Bureaucrat  norm("Narcissist", 10);
+  Form  generic("Form g42", false, 10, 10);
+
+  std::cout << norm;
+  std::cout << generic;
+  norm.sign_form(generic);
+  std::cout << generic;
+}
+
 void  test_low_grade()
 {
   log_level("Bureaucrat cannot sign form.", TEST);
@@ -65,6 +77,8 @@ int main()
   test_regular();
 
   test_low_grade();
+
+  test_bureaucrat_signing();
 
   try {
     test_low_sign_form();
