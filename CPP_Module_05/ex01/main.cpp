@@ -72,6 +72,15 @@ void  test_high_execution_form()
   Form  wrong("Form e42", false, 42, 0);
 }
 
+void  test_already_signed()
+{
+  log_level("Form is already signed test", TEST);
+  Bureaucrat  generic("generic", 42);
+  Form  with_signature("Form e42", true, 100, 100);
+
+  generic.sign_form(with_signature);
+}
+
 int main()
 {
   log_level_color("Start testing!\n", MAGENTA, INFO);
@@ -113,5 +122,7 @@ int main()
     std::cout << e.what() << std::endl;
   }
 
+  test_already_signed();
+  
   return EXIT_SUCCESS;
 }
