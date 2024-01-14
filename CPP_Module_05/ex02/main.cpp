@@ -1,117 +1,80 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 #include "utils.hpp"
 
-void  test_regular()
+void  test_president_regular()
 {
-  log_level("Just a regular bureaucrat.", TEST);
-  Bureaucrat  mand("regular bureaucrat", 10);
-  Form  yep("Form t20", false, 20, 20);
+  log_level("Successful pardoning.", TEST);
+  PresidentialPardonForm  p_form("Billy");
+  Bureaucrat  president("Nixon", 4);
 
-  std::cout << yep;
-  std::cout << mand;
-  try {
-    yep.be_signed(mand);
-  }
-  catch (std::exception &e) {
-    log_level("Caught exception.", ERROR);
-    std::cout << e.what() << std::endl;
-  }
-  log_level("Signing form.", INFO);
-  std::cout << yep;
+  president.sign_form(p_form);
+  president.execute_form(p_form);
 }
 
-void  test_bureaucrat_signing()
+void  test_president_unsigned()
 {
-  log_level("Bureaucrat member function 'sign_form'.", TEST);
-  Bureaucrat  norm("Narcissist", 10);
-  Form  generic("Form g42", false, 10, 10);
+  log_level("Not signed pardoning.", TEST);
+  PresidentialPardonForm  p_form("Alien");
+  Bureaucrat  president("Trump", 15);
 
-  std::cout << norm;
-  std::cout << generic;
-  norm.sign_form(generic);
-  std::cout << generic;
+  president.execute_form(p_form);
 }
 
-void  test_low_grade()
+void  test_robotomy_regular()
 {
-  log_level("Bureaucrat cannot sign form.", TEST);
-  Bureaucrat  low("Narcissist", 100);
-  Form  best("Form a1", false, 1, 1);
+  log_level("Signed robotomy.", TEST);
+  RobotomyRequestForm  r_form("C3PO");
+  Bureaucrat  luke("Luke", 4);
 
-  std::cout << low;
-  std::cout << best;
-  low.sign_form(best);
+  luke.sign_form(r_form);
+  luke.execute_form(r_form);
 }
 
-void  test_low_sign_form()
+void  test_robotomy_unsigned()
 {
-  log_level("Sign grade of Form is to low.", TEST);
-  Bureaucrat  generic("generic", 42);
-  Form  wrong("Form e42", false, 170, 42);
+  log_level("Signed robotomy.", TEST);
+  RobotomyRequestForm  r_form("R2D2");
+  Bureaucrat  jabba("Jabba", 10);
+
+  jabba.execute_form(r_form);
 }
 
-void  test_high_sign_form()
+void  test_shrubbery_regular()
 {
-  log_level("Sign grade of Form is to high.", TEST);
-  Bureaucrat  generic("generic", 42);
-  Form  wrong("Form e42", false, 0, 42);
+  log_level("Successful shrubbery.", TEST);
+  ShrubberyCreationForm  s_form("Tree");
+  Bureaucrat  builder("Builder", 4);
+
+  builder.sign_form(s_form);
+  builder.execute_form(s_form);
 }
 
-void  test_low_execution_form()
+void  test_shrubbery_unsigned()
 {
-  log_level("Sign grade of Form is to low.", TEST);
-  Bureaucrat  generic("generic", 42);
-  Form  wrong("Form e42", false, 42, 170);
+  log_level("Not signed shrubbery.", TEST);
+  ShrubberyCreationForm  s_form("Stud");
+  Bureaucrat  president("Trump", 50);
+
+  president.execute_form(s_form);
 }
 
-void  test_high_execution_form()
-{
-  log_level("Execution grade of Form is to high", TEST);
-  Bureaucrat  generic("generic", 42);
-  Form  wrong("Form e42", false, 42, 0);
-}
 
 int main()
 {
-  log_level_color("Start testing!\n", MAGENTA, INFO);
-  test_regular();
+  test_president_regular();
 
-  test_low_grade();
+  test_president_unsigned();
 
-  test_bureaucrat_signing();
+  test_robotomy_regular();
 
-  try {
-    test_low_sign_form();
-  }
-  catch (std::exception& e) {
-    log_level("Caught form exception.", ERROR);
-    std::cout << e.what() << std::endl;
-  }
+  test_robotomy_unsigned();
 
-  try {
-    test_high_sign_form();
-  }
-  catch (std::exception& e) {
-    log_level("Caught form exception.", ERROR);
-    std::cout << e.what() << std::endl;
-  }
+  test_shrubbery_regular();
 
-  try {
-    test_low_execution_form();
-  }
-  catch (std::exception& e) {
-    log_level("Caught form exception.", ERROR);
-    std::cout << e.what() << std::endl;
-  }
-
-  try {
-    test_high_execution_form();
-  }
-  catch (std::exception& e) {
-    log_level("Caught form exception.", ERROR);
-    std::cout << e.what() << std::endl;
-  }
+  test_shrubbery_unsigned();
 
   return EXIT_SUCCESS;
 }

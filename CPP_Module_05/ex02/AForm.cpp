@@ -2,15 +2,23 @@
 #include "Bureaucrat.hpp"
 
 AForm::AForm()
-  : name_("undefined"), signed_(false), sign_grade_(1), execute_grade_(1) {}
+  : name_("undefined"),
+    signed_(false),
+    sign_grade_(1),
+    execute_grade_(1),
+    target_("default") {}
 
 AForm::AForm(
     const std::string& name,
     bool signature,
     unsigned int sign_grade,
-    unsigned int execute_grade)
-  : name_(name), signed_(signature),
-    sign_grade_(sign_grade), execute_grade_(execute_grade)
+    unsigned int execute_grade,
+    const std::string& target)
+  : name_(name),
+    signed_(signature),
+    sign_grade_(sign_grade),
+    execute_grade_(execute_grade),
+    target_(target)
 {
   if (sign_grade_ > 150 || execute_grade_ > 150) {
     throw GradeTooLowException();
@@ -21,13 +29,17 @@ AForm::AForm(
 }
 
 AForm::AForm(const AForm& rhs)
-  : name_(rhs.name_), signed_(rhs.signed_),
-    sign_grade_(rhs.sign_grade_), execute_grade_(rhs.execute_grade_) {}
+  : name_(rhs.name_),
+    signed_(rhs.signed_),
+    sign_grade_(rhs.sign_grade_),
+    execute_grade_(rhs.execute_grade_),
+    target_(rhs.target_) {}
 
 AForm& AForm::operator=(const AForm& rhs)
 {
   if (this != &rhs) {
     signed_ = rhs.signed_;
+    target_ = rhs.target_;
   }
   return *this;
 }
@@ -57,7 +69,7 @@ const unsigned int&  AForm::get_execute_grade() const
 void  AForm::be_signed(const Bureaucrat &B)
 {
   if (true == signed_) {
-    throw AlreadySigned();
+    throw AlreadySignedException();
   }
   if (B.get_grade() > sign_grade_) {
     throw GradeTooLowException();
@@ -75,9 +87,24 @@ const char* AForm::GradeTooLowException::what() const throw()
   return "Grade is too low!";
 }
 
-const char* AForm::AlreadySigned::what() const throw()
+const char* AForm::AlreadySignedException::what() const throw()
 {
-  return "AForm is already signed!";
+  return "Form is already signed!";
+}
+
+const char* AForm::NotSignedException::what() const throw()
+{
+  return "Form is not yet signed!";
+}
+
+void  AForm::check_form_(const Bureaucrat& B) const
+{
+  if (false == signed_) {
+    throw NotSignedException();
+  }
+  if (execute_grade_ < B.get_grade()) {
+    throw GradeTooLowException();
+  }
 }
 
 std::ostream& operator<<(std::ostream& o, const AForm& F)
