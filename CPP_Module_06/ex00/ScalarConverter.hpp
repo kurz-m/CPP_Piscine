@@ -30,17 +30,23 @@ private:
 
   void  find_type_();
   void  find_special_();
-  void  from_char_();
-  void  from_int_();
-  void  from_float_();
-  void  from_double_();
+  void  print_output_();
+  void  cast_char_();
+  void  cast_int_();
+  void  cast_float_();
+  void  cast_sfloat();
+  void  cast_double_();
+  void  cast_sdouble();
 
   Type        type_;
   std::string input_;
   char        out_char_;
   int         out_int_;
+  long        tmp_int_;
   float       out_float_;
   double      out_double_;
+  long long   check_float_;
+  bool        overflow_;
 };
 
 #endif

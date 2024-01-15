@@ -1,6 +1,7 @@
 #include "ScalarConverter.hpp"
 #include <cctype>
 #include <sstream>
+#include <limits>
 
 ScalarConverter::ScalarConverter() 
   : type_(UNKNOWN),
@@ -8,7 +9,8 @@ ScalarConverter::ScalarConverter()
     out_char_(0),
     out_int_(0),
     out_float_(0),
-    out_double_(0)
+    out_double_(0),
+    overflow_(false)
 {}
 
 ScalarConverter::ScalarConverter(const std::string& str) 
@@ -17,7 +19,8 @@ ScalarConverter::ScalarConverter(const std::string& str)
     out_char_(0),
     out_int_(0),
     out_float_(0),
-    out_double_(0)
+    out_double_(0),
+    overflow_(false)
 {}
 
 ScalarConverter::ScalarConverter(const ScalarConverter& rhs)
@@ -36,12 +39,24 @@ void  ScalarConverter::convert(const std::string& str)
 {
   ScalarConverter container(str);
 
-  container.find_type_();
+  container.find_special_();
+  if (UNKNOWN == container.type_) {
+    container.find_type_();
+  }
+}
+
+void  ScalarConverter::find_special_()
+{
+  if ("nanf" == input_ || "-inff" == input_ || "+inff" == input_) {
+    type_ = S_FLOAT;
+  }
+  else if ("nan" == input_ || "-inf" == input_ || "+inf" == input_) {
+    type_ = S_DOUBLE;
+  }
 }
 
 void ScalarConverter::find_type_()
 {
-  find_special_();
   if (UNKNOWN != type_) {
     return;
   }
@@ -50,19 +65,29 @@ void ScalarConverter::find_type_()
     return;
   }
   std::istringstream  inbuf(input_);
-  inbuf >> out_int_;
+  inbuf >> tmp_int_;
   if (true == inbuf.fail()) {
     type_ = INVALID;
     return;
   }
   else if (true == inbuf.eof()) {
     type_ = INT;
+    if (tmp_int_ > std::numeric_limits<int>::max()
+        || tmp_int_ < std::numeric_limits<int>::min()) {
+      overflow_ = true;
+    }
+    out_int_ = tmp_int_;
     return;
   }
   inbuf.clear();
   inbuf.str(input_);
   inbuf >> out_double_;
   if (true == inbuf.eof()) {
+    check_float_ = out_double_;
+    if (check_float_ > std::numeric_limits<int>::max()
+        || check_float_ < std::numeric_limits<int>::min()) {
+      overflow_ = true;
+    }
     type_ = DOUBLE;
     return;
   }
@@ -72,8 +97,109 @@ void ScalarConverter::find_type_()
   char  leftover;
   inbuf >> leftover;
   if (true == inbuf.eof() && ('f' == leftover || 'F' == leftover)) {
+    check_float_ = out_double_;
+    if (check_float_ > std::numeric_limits<int>::max()
+        || check_float_ < std::numeric_limits<int>::min()) {
+      overflow_ = true;
+    }
     type_ = FLOAT;
     return;
   }
   type_ = INVALID;
+}
+
+void  ScalarConverter::print_output_()
+{
+  switch (type_) {
+  case CHAR:
+    cast_char_();
+    break;
+  case INT:
+    cast_int_();
+    break;
+  case FLOAT:
+    cast_float_();
+    break;
+  case DOUBLE:
+    cast_double_();
+    break;
+  case S_FLOAT:
+    cast_sfloat();
+    break;
+  case S_DOUBLE:
+    cast_sdouble();
+    break;
+  default:
+    
+    break;
+  }
+}
+
+void  ScalarConverter::cast_char_()
+{
+  std::cout << "char: '" << out_char_ << "'\n"
+            << "int: '" << static_cast<int>(out_char_) << "'\n"
+            << "float: '" << static_cast<float>(out_char_) << "f'\n"
+            << "double: '" << static_cast<double>(out_char_) << "'"
+            << std::endl;
+}
+
+void  ScalarConverter::cast_int_()
+{
+  out_char_ = static_cast<char>(out_int_);
+  if (std::isprint(out_char_)) {
+    std::cout << "char: '" << out_char_ << "'\n";
+  }
+  else {
+    std::cout << "char: 'Non displayable'\n";
+  }
+  if (true == overflow_) {
+    std::cout << "int: 'overflow'\n";
+  }
+  else {
+    std::cout << "int: '" << out_int_ << "'\n";
+  }
+  std::cout << "float: '" << static_cast<float>(out_int_) << "f'\n"
+            << "double: '" << static_cast<double>(out_int_) << "'"
+            << std::endl;
+}
+
+void  ScalarConverter::cast_float_()
+{
+  out_char_ = static_cast<char>(out_float_);
+  if (std::isprint(out_char_)) {
+    std::cout << "char: '" << out_char_ << "'\n";
+  }
+  else {
+    std::cout << "char: 'Non displayable'\n";
+  }
+  if (true == overflow_) {
+    std::cout << "int: 'overflow'\n";
+  }
+  else {
+    std::cout << "int: '" << static_cast<int>(out_float_) << "'\n";
+  }
+  std::cout << "float: '" << out_float_ << "f'\n"
+            << "double: '" << static_cast<double>(out_float_) << "'"
+            << std::endl;
+}
+
+void  ScalarConverter::cast_double_()
+{
+  out_char_ = static_cast<char>(out_double_);
+  if (std::isprint(out_char_)) {
+    std::cout << "char: '" << out_char_ << "'\n";
+  }
+  else {
+    std::cout << "char: 'Non displayable'\n";
+  }
+  if (true == overflow_) {
+    std::cout << "int: 'overflow'\n";
+  }
+  else {
+    std::cout << "int: '" << static_cast<int>(out_double_) << "'\n";
+  }
+  std::cout << "float: '" << static_cast<float>(out_double_) << "f'\n"
+            << "double: '" << out_double_ << "'"
+            << std::endl;
 }
