@@ -44,8 +44,11 @@ ScalarConverter::Type  ScalarConverter::get_type()
   }
   std::istringstream  inbuf(input_);
   inbuf >> out_int_;
-  if (inbuf.fail()) {
-
+  if (true == inbuf.fail()) {
+    return INVALID;
+  }
+  else if (true == inbuf.eof()) {
+    return INT;
   }
   inbuf.clear();
   inbuf.str(input_);
