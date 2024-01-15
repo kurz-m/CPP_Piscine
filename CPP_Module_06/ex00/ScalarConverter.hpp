@@ -15,6 +15,7 @@ public:
     DOUBLE,
     S_DOUBLE,
     INVALID,
+    UNKNOWN,
   };
 
   static void convert(const std::string&);
@@ -27,11 +28,12 @@ private:
   ScalarConverter(const ScalarConverter&);
   ScalarConverter& operator=(const ScalarConverter&);
 
-  Type  get_type();
-  void  from_char();
-  void  from_int();
-  void  from_float();
-  void  from_double();
+  void  find_type_();
+  void  find_special_();
+  void  from_char_();
+  void  from_int_();
+  void  from_float_();
+  void  from_double_();
 
   Type        type_;
   std::string input_;

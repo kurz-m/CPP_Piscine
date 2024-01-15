@@ -4,12 +4,20 @@
 
 int main()
 {
-  std::string test("42.0");
+  std::string test("42.0f");
 
-  double test1;
+  float test1;
 
   std::istringstream  inbuf(test);
   inbuf >> test1;
+
+  if (true == inbuf.eof()) {
+    std::cout << "double\n";
+  }
+  else {
+    std::cout << "float\n";
+  }
+  std::cout << inbuf;
 
   std::cout << std::fixed << std::setprecision(1) << test1 << std::endl;
 

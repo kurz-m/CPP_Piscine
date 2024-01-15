@@ -3,7 +3,7 @@
 #include <sstream>
 
 ScalarConverter::ScalarConverter() 
-  : type_(INVALID),
+  : type_(UNKNOWN),
     input_("empty"),
     out_char_(0),
     out_int_(0),
@@ -12,7 +12,7 @@ ScalarConverter::ScalarConverter()
 {}
 
 ScalarConverter::ScalarConverter(const std::string& str) 
-  : type_(INVALID),
+  : type_(UNKNOWN),
     input_(str),
     out_char_(0),
     out_int_(0),
@@ -35,23 +35,45 @@ ScalarConverter::~ScalarConverter() {}
 void  ScalarConverter::convert(const std::string& str)
 {
   ScalarConverter container(str);
+
+  container.find_type_();
 }
 
-ScalarConverter::Type  ScalarConverter::get_type()
+void ScalarConverter::find_type_()
 {
+  find_special_();
+  if (UNKNOWN != type_) {
+    return;
+  }
   if (input_.length() == 1 && std::isalpha(input_[0]) != 0) {
-    return CHAR;
+    type_ = CHAR;
+    return;
   }
   std::istringstream  inbuf(input_);
   inbuf >> out_int_;
   if (true == inbuf.fail()) {
-    return INVALID;
+    type_ = INVALID;
+    return;
   }
   else if (true == inbuf.eof()) {
-    return INT;
+    type_ = INT;
+    return;
   }
   inbuf.clear();
   inbuf.str(input_);
-
-  return INVALID;
+  inbuf >> out_double_;
+  if (true == inbuf.eof()) {
+    type_ = DOUBLE;
+    return;
+  }
+  inbuf.clear();
+  inbuf.str(input_);
+  inbuf >> out_float_;
+  char  leftover;
+  inbuf >> leftover;
+  if (true == inbuf.eof() && ('f' == leftover || 'F' == leftover)) {
+    type_ = FLOAT;
+    return;
+  }
+  type_ = INVALID;
 }
