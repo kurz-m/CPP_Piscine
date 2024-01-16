@@ -139,6 +139,7 @@ void  ScalarConverter::cast_char_()
 {
   std::cout << "char: '" << out_char_ << "'\n"
             << "int: '" << static_cast<int>(out_char_) << "'\n"
+            << std::fixed << std::setprecision(1)
             << "float: '" << static_cast<float>(out_char_) << "f'\n"
             << "double: '" << static_cast<double>(out_char_) << "'"
             << std::endl;
@@ -159,6 +160,7 @@ void  ScalarConverter::cast_int_()
   else {
     std::cout << "int: '" << out_int_ << "'\n";
   }
+  std::cout << std::fixed << std::setprecision(1);
   std::cout << "float: '" << static_cast<float>(out_int_) << "f'\n"
             << "double: '" << static_cast<double>(out_int_) << "'"
             << std::endl;
@@ -179,7 +181,7 @@ void  ScalarConverter::cast_float_()
   else {
     std::cout << "int: '" << static_cast<int>(out_float_) << "'\n";
   }
-  if (fmod(out_float_, 1.0)) {
+  if (0 == fmod(out_float_, 1.0)) {
     std::cout << std::fixed << std::setprecision(1);
   }
   std::cout << "float: '" << out_float_ << "f'\n"
@@ -202,7 +204,7 @@ void  ScalarConverter::cast_double_()
   else {
     std::cout << "int: '" << static_cast<int>(out_double_) << "'\n";
   }
-  if (fmod(out_double_, 1.0)) {
+  if (0 == fmod(out_double_, 1.0)) {
     std::cout << std::fixed << std::setprecision(1);
   }
   std::cout << "float: '" << static_cast<float>(out_double_) << "f'\n"
