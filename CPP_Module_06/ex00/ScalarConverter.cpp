@@ -2,6 +2,7 @@
 #include <cctype>
 #include <sstream>
 #include <limits>
+#include <iomanip>
 
 ScalarConverter::ScalarConverter() 
   : type_(UNKNOWN),
@@ -178,6 +179,9 @@ void  ScalarConverter::cast_float_()
   else {
     std::cout << "int: '" << static_cast<int>(out_float_) << "'\n";
   }
+  if (fmod(out_float_, 1.0)) {
+    std::cout << std::fixed << std::setprecision(1);
+  }
   std::cout << "float: '" << out_float_ << "f'\n"
             << "double: '" << static_cast<double>(out_float_) << "'"
             << std::endl;
@@ -197,6 +201,9 @@ void  ScalarConverter::cast_double_()
   }
   else {
     std::cout << "int: '" << static_cast<int>(out_double_) << "'\n";
+  }
+  if (fmod(out_double_, 1.0)) {
+    std::cout << std::fixed << std::setprecision(1);
   }
   std::cout << "float: '" << static_cast<float>(out_double_) << "f'\n"
             << "double: '" << out_double_ << "'"
