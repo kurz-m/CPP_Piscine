@@ -43,6 +43,7 @@ void  ScalarConverter::convert(const std::string& str)
   if (UNKNOWN == container.type_) {
     container.find_type_();
   }
+  container.print_output_();
 }
 
 void  ScalarConverter::find_special_()
@@ -57,14 +58,12 @@ void  ScalarConverter::find_special_()
 
 void ScalarConverter::find_type_()
 {
-  if (UNKNOWN != type_) {
-    return;
-  }
+  std::istringstream  inbuf(input_);
   if (input_.length() == 1 && std::isalpha(input_[0]) != 0) {
+    inbuf >> out_char_;
     type_ = CHAR;
     return;
   }
-  std::istringstream  inbuf(input_);
   inbuf >> tmp_int_;
   if (true == inbuf.fail()) {
     type_ = INVALID;
@@ -124,13 +123,13 @@ void  ScalarConverter::print_output_()
     cast_double_();
     break;
   case S_FLOAT:
-    cast_sfloat();
+    handle_sfloat_();
     break;
   case S_DOUBLE:
-    cast_sdouble();
+    handle_sdouble_();
     break;
   default:
-    
+    throw std::invalid_argument("no valid input argument.");
     break;
   }
 }
@@ -201,5 +200,23 @@ void  ScalarConverter::cast_double_()
   }
   std::cout << "float: '" << static_cast<float>(out_double_) << "f'\n"
             << "double: '" << out_double_ << "'"
+            << std::endl;
+}
+
+void  ScalarConverter::handle_sfloat_() const
+{
+  std::cout << "char: 'impossible'\n"
+            << "int: 'impossible'\n"
+            << "float: '" << input_ << "'\n"
+            << "double: '" << input_.substr(0, input_.size() - 1) << "'"
+            << std::endl;
+}
+
+void  ScalarConverter::handle_sdouble_() const
+{
+  std::cout << "char: 'impossible'\n"
+            << "int: 'impossible'\n"
+            << "float: '" << input_ << "f'\n"
+            << "double: '" << input_ << "'"
             << std::endl;
 }

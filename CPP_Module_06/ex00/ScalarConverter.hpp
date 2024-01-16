@@ -34,9 +34,9 @@ private:
   void  cast_char_();
   void  cast_int_();
   void  cast_float_();
-  void  cast_sfloat();
+  void  handle_sfloat_() const;
   void  cast_double_();
-  void  cast_sdouble();
+  void  handle_sdouble_() const;
 
   Type        type_;
   std::string input_;
