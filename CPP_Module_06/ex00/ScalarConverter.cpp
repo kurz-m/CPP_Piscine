@@ -92,7 +92,7 @@ void ScalarConverter::find_type_()
     inbuf.str(input_.substr(0, input_.size() - 1));
     inbuf >> out_float_;
     if (true == inbuf.eof()) {
-      check_float_ = out_double_;
+      check_float_ = out_float_;
       if (check_float_ > std::numeric_limits<int>::max()
           || check_float_ < std::numeric_limits<int>::min()) {
         overflow_ = true;
