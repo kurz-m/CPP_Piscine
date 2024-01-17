@@ -49,10 +49,18 @@ void  ScalarConverter::convert(const std::string& str)
 
 void  ScalarConverter::find_special_()
 {
-  if ("nanf" == input_ || "-inff" == input_ || "+inff" == input_) {
+  if ("nanf" == input_ || "-inff" == input_ ||
+      "+inff" == input_ || "inff" == input_) {
+    if ("inff" == input_) {
+      input_ = "+inff";
+    }
     type_ = S_FLOAT;
   }
-  else if ("nan" == input_ || "-inf" == input_ || "+inf" == input_) {
+  else if ("nan" == input_ || "-inf" == input_ ||
+      "+inf" == input_ || "inf" == input_) {
+    if ("inf" == input_) {
+      input_ = "+inf";
+    }
     type_ = S_DOUBLE;
   }
 }
