@@ -79,6 +79,20 @@ void ScalarConverter::find_type_()
     out_int_ = tmp_int_;
     return;
   }
+  if (input_.back() == 'f' || input_.back() == 'F') {
+    inbuf.clear();
+    inbuf.str(input_.substr(0, input_.size() - 1));
+    inbuf >> out_float_;
+    if (true == inbuf.eof()) {
+      check_float_ = out_double_;
+      if (check_float_ > std::numeric_limits<int>::max()
+          || check_float_ < std::numeric_limits<int>::min()) {
+        overflow_ = true;
+      }
+      type_ = FLOAT;
+      return;
+    }
+  }
   inbuf.clear();
   inbuf.str(input_);
   inbuf >> out_double_;
@@ -89,20 +103,6 @@ void ScalarConverter::find_type_()
       overflow_ = true;
     }
     type_ = DOUBLE;
-    return;
-  }
-  inbuf.clear();
-  inbuf.str(input_);
-  inbuf >> out_float_;
-  char  leftover;
-  inbuf >> leftover;
-  if (true == inbuf.eof() && ('f' == leftover || 'F' == leftover)) {
-    check_float_ = out_double_;
-    if (check_float_ > std::numeric_limits<int>::max()
-        || check_float_ < std::numeric_limits<int>::min()) {
-      overflow_ = true;
-    }
-    type_ = FLOAT;
     return;
   }
   type_ = INVALID;

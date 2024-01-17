@@ -7,9 +7,11 @@ CC := c++
 ################################################################################
 
 G := \033[32m
+M := \033[31m
 X := \033[0m
 BO := $(shell tput bold)
 LOG := printf "[$(BO)$(G)ⓘ INFO$(X)] %s\n"
+TEST := printf "[$(BO)$(M)ⓘ TEST$(X)] %s\n"
 
 ################################################################################
 ###############                  DIRECTORIES                      ##############
@@ -74,7 +76,26 @@ fclean: clean
 re: fclean all
 
 test: all
-	@./$(NAME)
+	@$(TEST) "Test INT"
+	@./$(NAME) 42
+
+	@$(TEST) "Test CHAR"
+	@./$(NAME) z
+
+	@$(TEST) "Test FLOAT"
+	@./$(NAME) 42.0f
+
+	@$(TEST) "Test DOUBLE"
+	@./$(NAME) 42.4
+
+	@$(TEST) "Test inf"
+	@./$(NAME) inf
+
+	@$(TEST) "Test nanf"
+	@./$(NAME) nanf
+
+	@$(TEST) "Test -inf"
+	@./$(NAME) -inf
 
 -include $(OBJS:$(OBJ_DIR)/%.o=$(OBJ_DIR)/%.d)
 
