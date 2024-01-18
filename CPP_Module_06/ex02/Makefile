@@ -1,4 +1,4 @@
-NAME := scalarconverter
+NAME := typetool
 .DEFAULT_GOAL := all
 CC := c++
 

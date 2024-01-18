@@ -1,14 +1,28 @@
-#include "ScalarConverter.hpp"
+#include "TypeTools.hpp"
+#include <cstdlib>
+#include "utils.hpp"
 
-int main(int argc, char* argv[])
+void test_identify_via_pointer()
 {
-  if (2 == argc) {
-    try {
-      ScalarConverter::convert(argv[1]);
-    }
-    catch (const std::invalid_argument& e) {
-      std::cerr << "Program recieved " << e.what() << std::endl;
-    }
-  }
+  log_level("Test identify via pointer", TEST);
+  Base* ptr = generate();
+
+  identify(ptr);
+}
+
+void test_identify_via_ref()
+{
+  log_level("Test identify via reference", TEST);
+  Base* ptr = generate();
+
+  identify(*ptr);
+}
+
+int main()
+{
+  test_identify_via_pointer();
+  
+  test_identify_via_ref();
+
   return EXIT_SUCCESS;
 }
