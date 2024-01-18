@@ -4,7 +4,7 @@
 #include <string>
 
 struct Data {
-  std::string data;
+  std::string content;
 };
 
 #endif
