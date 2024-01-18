@@ -29,8 +29,11 @@ ScalarConverter::ScalarConverter(const ScalarConverter& rhs)
   *this = rhs;
 }
 
-ScalarConverter& ScalarConverter::operator=(const ScalarConverter&)
+ScalarConverter& ScalarConverter::operator=(const ScalarConverter& rhs)
 {
+  if (this != &rhs) {
+    *this = rhs;
+  }
   return *this;
 }
 

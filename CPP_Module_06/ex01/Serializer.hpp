@@ -2,11 +2,10 @@
 # define SERIALIZER_HPP_
 
 #include <string>
+#include <cstdlib>
+#include <stdint.h>
 
-struct Data {
-  std::string   name;
-  unsigned int  number;
-};
+struct Data;
 
 class Serializer {
 public:
