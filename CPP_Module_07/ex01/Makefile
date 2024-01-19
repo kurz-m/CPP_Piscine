@@ -1,4 +1,4 @@
-NAME := algorithmtemplates
+NAME := iter
 .DEFAULT_GOAL := all
 CC := c++
 
