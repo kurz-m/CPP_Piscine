@@ -1,4 +1,4 @@
-NAME := templates
+NAME := algorithmtemplates
 .DEFAULT_GOAL := all
 CC := c++
 

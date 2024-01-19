@@ -1,5 +1,5 @@
-#ifndef ALGORITHMTEMPLATES_HPP_
-# define ALGORITHMTEMPLATES_HPP_
+#ifndef TEMPLATES_HPP_
+# define TEMPLATES_HPP_
 
 template<typename T>
 void  swap(T& x, T& y)

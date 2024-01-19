@@ -1,4 +1,4 @@
-#include "AlgorithmTemplates.hpp"
+#include "templates.hpp"
 #include <iostream>
 
 int main( void )
