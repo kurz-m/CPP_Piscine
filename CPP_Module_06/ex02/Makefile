@@ -75,28 +75,6 @@ fclean: clean
 
 re: fclean all
 
-test: all
-	@$(TEST) "Test INT"
-	@./$(NAME) 42
-
-	@$(TEST) "Test CHAR"
-	@./$(NAME) z
-
-	@$(TEST) "Test FLOAT"
-	@./$(NAME) 42.0f
-
-	@$(TEST) "Test DOUBLE"
-	@./$(NAME) 42.4
-
-	@$(TEST) "Test inf"
-	@./$(NAME) inf
-
-	@$(TEST) "Test nanf"
-	@./$(NAME) nanf
-
-	@$(TEST) "Test -inf"
-	@./$(NAME) -inf
-
 -include $(OBJS:$(OBJ_DIR)/%.o=$(OBJ_DIR)/%.d)
 
-.PHONY: all fclean clean re test
+.PHONY: all fclean clean re
