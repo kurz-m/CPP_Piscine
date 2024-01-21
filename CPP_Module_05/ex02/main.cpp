@@ -35,7 +35,7 @@ void  test_robotomy_regular()
 
 void  test_robotomy_unsigned()
 {
-  log_level("Signed robotomy.", TEST);
+  log_level("Unsigned robotomy.", TEST);
   RobotomyRequestForm  r_form("R2D2");
   Bureaucrat  jabba("Jabba", 10);
 

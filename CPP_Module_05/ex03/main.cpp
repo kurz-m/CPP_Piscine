@@ -39,7 +39,7 @@ void  test_shrubbery_form()
   AForm*  form;
   Bureaucrat  manny("Manny", 4);
 
-  form = task_juggler.make_form("shrubbery creation", "någon");
+  form = task_juggler.make_form("shrubbery creation", "wally");
   manny.sign_form(*form);
   manny.execute_form(*form);
   delete form;
