@@ -1,4 +1,4 @@
-NAME := templates
+NAME := easyfind
 .DEFAULT_GOAL := all
 CC := c++
 
