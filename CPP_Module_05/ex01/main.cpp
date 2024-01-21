@@ -60,7 +60,7 @@ void  test_high_sign_form()
 
 void  test_low_execution_form()
 {
-  log_level("Sign grade of Form is to low.", TEST);
+  log_level("Execution grade of Form is to low.", TEST);
   Bureaucrat  generic("generic", 42);
   Form  wrong("Form e42", false, 42, 170);
 }
