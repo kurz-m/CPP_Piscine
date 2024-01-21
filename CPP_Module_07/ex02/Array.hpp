@@ -34,7 +34,9 @@ public:
 
   ~Array()
   {
-    delete[] array_;
+    if (0 != size_) {
+      delete[] array_;
+    }
   }
 
   size_t  size() const
