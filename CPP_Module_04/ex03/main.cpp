@@ -103,13 +103,7 @@ void test_capacity() {
   e.use(4, c);
 }
 
-void  check_leaks()
-{
-  system("leaks character");
-}
-
 int main(int argc, char **argv) {
-  atexit(check_leaks);
   if (argc > 1)
   {
     int test = std::string(argv[1]).compare("1") == 0 ? 0 :
