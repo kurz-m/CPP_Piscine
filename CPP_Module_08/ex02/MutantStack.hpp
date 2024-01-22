@@ -2,6 +2,7 @@
 #define MUTANTSTACK_HPP_
 
 #include <stack>
+#include <ostream>
 
 template<
   typename T,
@@ -16,7 +17,7 @@ public:
     std::stack<T, Container>::operator=(rhs);
     return *this;
   }
-  ~MutantStack();
+  ~MutantStack() {}
 
   typedef typename Container::iterator iterator;
   typedef typename Container::const_iterator const_iterator;
@@ -41,5 +42,20 @@ public:
     return this->c.end();
   }
 };
+
+template<typename T, typename Container>
+std::ostream& operator<<(std::ostream& o, const MutantStack<T, Container>& stack)
+{
+  typename MutantStack<T, Container>::const_iterator  it = stack.end();
+
+  o << "Stack:\n";
+
+  while (it != stack.begin()) {
+    --it;
+    o << *it << "\n";
+  }
+  o << "------------\n";
+  return o;
+}
 
 #endif

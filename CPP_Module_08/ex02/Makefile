@@ -1,4 +1,4 @@
-NAME := easyfind
+NAME := mutantstack
 .DEFAULT_GOAL := all
 CC := c++
 
