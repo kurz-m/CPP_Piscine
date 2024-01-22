@@ -1,10 +1,17 @@
 #include "Span.hpp"
 #include <algorithm>
 #include <iterator>
+#include <climits>
+#include <ostream>
 
 Span::Span(size_t N) : capacity_(N)
 {
   elements_.reserve(N);
+}
+
+Span::Span(size_t N, int start, int end) : capacity_(N)
+{
+  add_range(start, end);
 }
 
 Span::Span(const Span& rhs)
@@ -26,9 +33,37 @@ Span::~Span() {}
 void  Span::add_number(int n)
 {
   if (elements_.size() == capacity_) {
-    throw std::runtime_error("Capacity of Span is reached.");
+    throw std::length_error("Capacity of Span is reached.");
   }
   elements_.push_back(n);
+}
+
+void  Span::add_range(int start, int end)
+{
+    if (elements_.size() + (end - start) > capacity_) {
+      throw std::length_error("Capacity of Span is reached.");
+    }
+    if (start > end) {
+      for (int i = start; i > end; --i) {
+        elements_.push_back(i);
+      }
+    }
+    else if (start < end) {
+      for (int i = start; i < end; ++i) {
+        elements_.push_back(i);
+      }
+    }
+    else {
+      throw std::logic_error("Cannot add numbers with range of 0.");
+    }
+}
+
+const int& Span::operator[](size_t index) const
+{
+  if (index >= elements_.size()) {
+    throw std::out_of_range("Index out of range.");
+  }
+  return elements_[index];
 }
 
 size_t  Span::get_size() const
@@ -36,10 +71,10 @@ size_t  Span::get_size() const
   return elements_.size();
 }
 
-size_t  Span::longest_range()
+size_t  Span::longest_span()
 {
   if (elements_.size() < 2) {
-    throw std::runtime_error("Span contains less than 2 numbers.");
+    throw std::logic_error("Span contains less than 2 numbers.");
   }
 
   std::vector<int>::iterator  max;
@@ -51,10 +86,10 @@ size_t  Span::longest_range()
   return static_cast<size_t>(*max - *min);
 }
 
-size_t  Span::shortest_range()
+size_t  Span::shortest_span()
 {
   if (elements_.size() < 2) {
-    throw std::runtime_error("Span contains less than 2 numbers.");
+    throw std::logic_error("Span contains less than 2 numbers.");
   }
 
   std::vector<int>  sorted = elements_;
@@ -66,4 +101,16 @@ size_t  Span::shortest_range()
     shortest = std::min(shortest, *it - *(it - 1));
   }
   return static_cast<size_t>(shortest);
+}
+
+std::ostream& operator<<(std::ostream& o, const Span& s)
+{
+  o << "[";
+  for (size_t i = 0; i < s.get_size(); ++i) {
+    if (i > 0) {
+      o << ", ";
+    }
+    o << s[i];
+  }
+  return o << "]";
 }
