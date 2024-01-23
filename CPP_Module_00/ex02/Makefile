@@ -1,7 +1,7 @@
 NAME := account
 SHELL := /bin/bash
 .DEFAULT_GOAL := all
-CC := c++
+CXX := c++
 
 ################################################################################
 ###############                 PRINT OPTIONS                     ##############
@@ -35,23 +35,23 @@ OBJS := $(addprefix $(OBJ_DIR)/, $(SRCS:%.cpp=%.o))
 ########                         COMPILING                      ################
 ################################################################################
 
-CFLAGS ?= -Wextra -Wall -Werror -std=c++98 -MMD -MP $(addprefix -I, $(INC_DIRS))
+CXXFLAGS ?= -Wextra -Wall -Werror -std=c++98 -MMD -MP $(addprefix -I, $(INC_DIRS))
 
 all: $(NAME)
 
 $(NAME): $(OBJS) | $(LIBFT)
 	@$(LOG) "Linking object files to $@"
-	@$(CC) $^ $(LDFLAGS) -o $@
+	@$(CXX) $^ $(LDFLAGS) -o $@
 
 $(OBJ_DIR)/%.o: %.cpp | $(OBJ_DIR)
 	@$(LOG) "Compiling $(notdir $@)"
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CXX) $(CXXFLAGS) -c $< -o $@
 
 $(OBJ_DIR):
 	@$(LOG) "Creating object directory."
 	@mkdir -p $@
 
-debug: CFLAGS += -g
+debug: CXXFLAGS += -g
 debug: fclean all
 
 clean:
