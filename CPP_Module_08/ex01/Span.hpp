@@ -6,7 +6,7 @@
 
 class Span {
 public:
-  Span(size_t N = 0);
+  explicit Span(size_t N = 0);
   Span(size_t, int, int);
   Span(const Span&);
   Span& operator=(const Span&);

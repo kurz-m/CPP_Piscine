@@ -34,7 +34,11 @@ void  test_creating_rnd_stack()
 void  test_list_container()
 {
   print_test_name("take list container");
-  MutantStack< int, std::list<int> > stack = create_random_stack< int, std::list<int> >(10);
+  MutantStack<
+    int,
+    std::list<int>
+  >
+  stack = create_random_stack< int, std::list<int> >(10);
 
   std::cout << "Top of stack: " << stack.top() << "\n";
   std::cout << "pop one element\n";
