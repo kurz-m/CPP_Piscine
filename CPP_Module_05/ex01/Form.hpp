@@ -10,7 +10,6 @@ class Bureaucrat;
 
 class Form {
 public:
-  Form();
   Form(const std::string&, bool, unsigned int, unsigned int);
   Form(const Form&);
   Form& operator=(const Form&);
@@ -34,6 +33,8 @@ public:
   };
 
 private:
+  Form();
+
   const std::string name_;
   bool  signed_;
   const unsigned int  sign_grade_;

@@ -15,7 +15,7 @@ public:
   void  guard_gate();
 
 private:
-  int guard_state_;
+  bool guard_state_;
 };
 
 #endif

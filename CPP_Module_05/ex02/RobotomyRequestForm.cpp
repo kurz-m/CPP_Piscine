@@ -20,7 +20,7 @@ RobotomyRequestForm::~RobotomyRequestForm() {}
 
 void  RobotomyRequestForm::execute(const Bureaucrat & executor) const
 {
-  std::srand(std::time(NULL));
+  std::srand(time(NULL));
 
   check_form_(executor);
   log_level("***whirr whirr, drr-drr-drr, clang-clang***", INFO);

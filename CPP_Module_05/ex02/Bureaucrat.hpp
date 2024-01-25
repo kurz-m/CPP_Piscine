@@ -10,7 +10,6 @@ class AForm;
 
 class Bureaucrat {
 public:
-  Bureaucrat();
   Bureaucrat(const std::string&, unsigned int);
   Bureaucrat(const Bureaucrat&);
   Bureaucrat& operator=(const Bureaucrat&);
@@ -32,6 +31,8 @@ public:
   };
 
 private:
+  Bureaucrat();
+
   const std::string name_;
   unsigned int  grade_;
 };

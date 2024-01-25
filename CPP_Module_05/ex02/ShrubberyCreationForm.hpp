@@ -5,7 +5,6 @@
 
 class ShrubberyCreationForm: public AForm {
 public:
-  ShrubberyCreationForm();
   ShrubberyCreationForm(const std::string&);
   ShrubberyCreationForm(const ShrubberyCreationForm&);
   ShrubberyCreationForm& operator=(const ShrubberyCreationForm&);
@@ -14,6 +13,8 @@ public:
   void  execute(const Bureaucrat&) const;
 
 private:
+  ShrubberyCreationForm();
+
   static const std::string  tree_;
 };
 
