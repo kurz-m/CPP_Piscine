@@ -2,10 +2,21 @@
 #include "utils.hpp"
 #include <cstdlib>
 #include <exception>
+#include <fstream>
 
 Base* generate()
 {
-  std::srand(time(NULL));
+  std::ifstream urandom("/dev/urandom", std::ios::in | std::ios::binary);
+
+  if (urandom.is_open() == true) {
+    uint  seed;
+    urandom.read(reinterpret_cast<char*>(&seed), sizeof(seed));
+    std::srand(seed);
+    urandom.close();
+  }
+  else {
+    std::srand(time(NULL));
+  }
   switch (std::rand() % 3) {
   case 0:
     return new A;

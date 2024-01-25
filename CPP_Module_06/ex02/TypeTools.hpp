@@ -1,6 +1,8 @@
 #ifndef TYPETOOL_HPP_
 # define TYPETOOL_HPP_
 
+typedef unsigned int uint;
+
 class Base;
 
 Base* generate();
