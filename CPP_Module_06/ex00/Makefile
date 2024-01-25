@@ -77,25 +77,28 @@ re: fclean all
 
 test: all
 	@$(TEST) "Test INT"
-	@./$(NAME) 42
+	./$(NAME) 42
 
 	@$(TEST) "Test CHAR"
-	@./$(NAME) z
+	./$(NAME) z
 
 	@$(TEST) "Test FLOAT"
-	@./$(NAME) 42.0f
+	./$(NAME) 42.0f
 
 	@$(TEST) "Test DOUBLE"
-	@./$(NAME) 42.4
+	./$(NAME) 42.4
 
 	@$(TEST) "Test inf"
-	@./$(NAME) inf
+	./$(NAME) inf
 
 	@$(TEST) "Test nanf"
-	@./$(NAME) nanf
+	./$(NAME) nanf
 
 	@$(TEST) "Test -inf"
-	@./$(NAME) -inf
+	./$(NAME) -inf
+
+	@$(TEST) "Test wrong input"
+	./$(NAME) abcd
 
 -include $(OBJS:$(OBJ_DIR)/%.o=$(OBJ_DIR)/%.d)
 
