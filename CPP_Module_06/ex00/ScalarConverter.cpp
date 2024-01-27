@@ -174,8 +174,8 @@ void  ScalarConverter::cast_int_()
     std::cout << "int: '" << out_int_ << "'\n";
   }
   std::cout << std::fixed << std::setprecision(1);
-  std::cout << "float: '" << static_cast<float>(out_int_) << "f'\n"
-            << "double: '" << static_cast<double>(out_int_) << "'"
+  std::cout << "float: '" << static_cast<float>(tmp_int_) << "f'\n"
+            << "double: '" << static_cast<double>(tmp_int_) << "'"
             << std::endl;
 }
 
