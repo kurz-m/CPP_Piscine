@@ -10,6 +10,7 @@ class Date {
 public:
   Date();
   explicit Date(uint, uint,uint);
+  explicit Date(std::string&);
   Date(const Date&);
   Date& operator=(const Date&);
   ~Date();
