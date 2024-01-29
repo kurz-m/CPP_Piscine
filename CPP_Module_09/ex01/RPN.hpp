@@ -6,24 +6,29 @@
 #include <cctype>
 #include <iostream>
 
+#ifndef ADVANCED
+#define ADVANCED 0
+#endif
+
 class RpnCalculator {
 public:
   RpnCalculator(const std::string&);
   ~RpnCalculator();
 
   void  rpn_calculator();
+  void  rpn_calculator_adv();
 
 private:
   RpnCalculator();
   RpnCalculator(const RpnCalculator&);
   RpnCalculator& operator=(const RpnCalculator&);
 
-  bool is_valid_() const;
-  void  skip_space_(std::string::const_iterator&);
+  bool parse_nbr_(std::string::iterator&, const std::string::iterator&);
+  void  skip_space_(std::string::iterator&);
 
   std::stack<int> stack_;
   std::string input_;
-  char  tmp_value_;
+  int  tmp_value_;
 };
 
 #endif
