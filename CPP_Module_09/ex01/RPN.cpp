@@ -1,6 +1,7 @@
 #include "RPN.hpp"
 #include <stdexcept>
 #include <cstdlib>
+#include <sstream>
 
 static const std::string operators("+-*/");
 
@@ -26,11 +27,11 @@ RpnCalculator::~RpnCalculator() {}
 
 void RpnCalculator::rpn_calculator()
 {
-  std::string::const_iterator it;;
+  std::string::iterator it;;
 
   for (it = input_.begin(); it != input_.end(); ++it) {
-    if (std::isdigit(*it)) {
-      stack_.push(std::atoi(&(*it)));
+    if (parse_nbr_(it, input_.end()) == true) {
+      stack_.push(tmp_value_);
     }
     else if (operators.find(*it) != std::string::npos) {
       if (stack_.size() < 2) {
@@ -68,14 +69,20 @@ void RpnCalculator::rpn_calculator()
   std::cout << stack_.top();
 }
 
-void RpnCalculator::skip_space_(std::string::const_iterator& it)
+void RpnCalculator::skip_space_(std::string::iterator& it)
 {
   if (it != input_.end() && std::isspace(*it) == false) {
     throw std::invalid_argument("You provided a wrong input.");
   }
 }
 
-bool RpnCalculator::is_valid_() const
+bool
+RpnCalculator::parse_nbr_(std::string::iterator& it, const std::string::iterator& eit)
 {
-  return stack_.size() > 1;
+  std::istringstream iss(std::string(it, eit));
+
+  iss >> tmp_value_;
+
+  return true;
+
 }
