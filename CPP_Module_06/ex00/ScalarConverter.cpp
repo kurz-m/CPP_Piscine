@@ -91,7 +91,7 @@ void ScalarConverter::find_type_()
     out_int_ = tmp_int_;
     return;
   }
-  std::string::reverse_iterator rit = input_.rbegin();
+  std::string::const_reverse_iterator rit = input_.rbegin();
   if (*rit == 'f' || *rit == 'F') {
     inbuf.clear();
     inbuf.str(input_.substr(0, input_.size() - 1));
@@ -174,8 +174,8 @@ void  ScalarConverter::cast_int_()
     std::cout << "int: '" << out_int_ << "'\n";
   }
   std::cout << std::fixed << std::setprecision(1);
-  std::cout << "float: '" << static_cast<float>(out_int_) << "f'\n"
-            << "double: '" << static_cast<double>(out_int_) << "'"
+  std::cout << "float: '" << static_cast<float>(tmp_int_) << "f'\n"
+            << "double: '" << static_cast<double>(tmp_int_) << "'"
             << std::endl;
 }
 

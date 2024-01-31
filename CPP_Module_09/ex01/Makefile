@@ -1,4 +1,4 @@
-NAME := scalarconverter
+NAME := RPN
 .DEFAULT_GOAL := all
 CXX := c++
 
@@ -38,6 +38,13 @@ OBJS := $(addprefix $(OBJ_DIR)/, $(SRCS:%.cpp=%.o))
 ################################################################################
 
 CXXFLAGS ?= -Wextra -Wall -Werror -std=c++98 -MMD -MP $(addprefix -I, $(INC_DIRS))
+EXTRA_FLAG := -D ADVANCED=1
+
+ADVANCED ?= 0
+ifeq ($(ADVANCED), 1)
+	CXXFLAGS += $(EXTRA_FLAG) -g
+endif
+
 LDFLAGS := 
 
 all: $(NAME)
@@ -75,34 +82,6 @@ fclean: clean
 
 re: fclean all
 
-test: all
-	@$(TEST) "Test INT"
-	./$(NAME) 42
-
-	@$(TEST) "Test CHAR"
-	./$(NAME) z
-
-	@$(TEST) "Test FLOAT"
-	./$(NAME) 42.0f
-
-	@$(TEST) "Test DOUBLE"
-	./$(NAME) 42.4
-
-	@$(TEST) "Test inf"
-	./$(NAME) inf
-
-	@$(TEST) "Test nanf"
-	./$(NAME) nanf
-
-	@$(TEST) "Test -inf"
-	./$(NAME) -inf
-
-	@$(TEST) "Test wrong input"
-	./$(NAME) abcd
-
-	@$(TEST) "Test wrong input"
-	@./$(NAME) "abcds"
-
 -include $(OBJS:$(OBJ_DIR)/%.o=$(OBJ_DIR)/%.d)
 
-.PHONY: all fclean clean re test
+.PHONY: all fclean clean re
