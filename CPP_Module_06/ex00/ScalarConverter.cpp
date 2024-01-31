@@ -3,6 +3,7 @@
 #include <sstream>
 #include <limits>
 #include <iomanip>
+#include <cmath>
 
 ScalarConverter::ScalarConverter() 
   : type_(UNKNOWN),
@@ -90,7 +91,8 @@ void ScalarConverter::find_type_()
     out_int_ = tmp_int_;
     return;
   }
-  if (input_.back() == 'f' || input_.back() == 'F') {
+  std::string::reverse_iterator rit = input_.rbegin();
+  if (*rit == 'f' || *rit == 'F') {
     inbuf.clear();
     inbuf.str(input_.substr(0, input_.size() - 1));
     inbuf >> out_float_;

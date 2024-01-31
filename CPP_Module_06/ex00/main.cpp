@@ -10,5 +10,8 @@ int main(int argc, char* argv[])
       std::cerr << "Program recieved " << e.what() << std::endl;
     }
   }
+  else {
+    std::cerr << "Usage: ./scalarconverter [argument]" << std::endl;
+  }
   return EXIT_SUCCESS;
 }

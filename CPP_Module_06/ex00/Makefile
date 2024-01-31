@@ -97,6 +97,9 @@ test: all
 	@$(TEST) "Test -inf"
 	@./$(NAME) -inf
 
+	@$(TEST) "Test wrong input"
+	@./$(NAME) "abcds"
+
 -include $(OBJS:$(OBJ_DIR)/%.o=$(OBJ_DIR)/%.d)
 
 .PHONY: all fclean clean re test
