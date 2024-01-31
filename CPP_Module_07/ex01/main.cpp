@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <cmath>
+#include "utils.hpp"
 
 void  to_upper(std::string& s)
 {
@@ -33,8 +34,8 @@ void  test_with_strings()
     "Numbers!",
   };
 
-  std::cout << "[TEST] std::string with to_upper function.\n";
-  std::cout << "[INFO] Before using function.\n";
+  log_level("std::string with to_upper function.", TEST);
+  log_level("Before using function:", INFO);
 
   for (size_t i = 0; i < 3; ++i) {
     std::cout << array[i] << "\n";
@@ -43,7 +44,7 @@ void  test_with_strings()
 
   iter(array, 3, to_upper);
 
-  std::cout << "\n[INFO] After using function.\n";
+  log_level("After using function:", INFO);
 
   for (size_t i = 0; i < 3; ++i) {
     std::cout << array[i] << "\n";
@@ -58,8 +59,8 @@ void  test_times_two()
     25,
   };
 
-  std::cout << "\n[TEST] int with square function.\n";
-  std::cout << "[INFO] Before using function.\n";
+  log_level("int with square function.", TEST);
+  log_level("Before using function:", INFO);
 
   for (size_t i = 0; i < 3; ++i) {
     std::cout << array[i] << "\n";
@@ -67,7 +68,7 @@ void  test_times_two()
 
   iter(array, 3, times_two);
 
-  std::cout << "\n[INFO] After using function.\n";
+  log_level("After using function:", INFO);
 
   for (size_t i = 0; i < 3; ++i) {
     std::cout << array[i] << "\n";
@@ -82,8 +83,8 @@ void  test_rotone()
     '5',
   };
 
-  std::cout << "\n[TEST] char with rotone function.\n";
-  std::cout << "[INFO] Before using function.\n";
+  log_level("char with rotone function.", TEST);
+  log_level("Before using function", INFO);
 
   for (size_t i = 0; i < 3; ++i) {
     std::cout << array[i] << "\n";
@@ -92,7 +93,7 @@ void  test_rotone()
 
   iter(array, 3, rotone);
 
-  std::cout << "\n[INFO] After using function.\n";
+  log_level("After using function:", INFO);
 
   for (size_t i = 0; i < 3; ++i) {
     std::cout << array[i] << "\n";
