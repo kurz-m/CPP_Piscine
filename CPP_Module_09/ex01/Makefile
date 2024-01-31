@@ -40,13 +40,6 @@ OBJS := $(addprefix $(OBJ_DIR)/, $(SRCS:%.cpp=%.o))
 CXXFLAGS ?= -Wextra -Wall -Werror -std=c++98 -MMD -MP $(addprefix -I, $(INC_DIRS))
 EXTRA_FLAG := -D ADVANCED=1
 
-ADVANCED ?= 0
-ifeq ($(ADVANCED), 1)
-	CXXFLAGS += $(EXTRA_FLAG) -g
-endif
-
-LDFLAGS := 
-
 all: $(NAME)
 
 $(NAME): $(OBJS)
@@ -60,6 +53,9 @@ $(OBJ_DIR)/%.o: %.cpp | $(OBJ_DIR)
 $(OBJ_DIR):
 	@$(LOG) "Creating object directory."
 	@mkdir -p $@
+
+advanced: CXXFLAGS += $(EXTRA_FLAG)
+advanced: fclean all
 
 debug: CXXFLAGS += -g
 debug: fclean all

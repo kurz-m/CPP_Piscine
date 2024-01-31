@@ -1,5 +1,6 @@
 #include "RPN.hpp"
 #include <stdexcept>
+#include <cmath>
 #include <cstdlib>
 #include <sstream>
 
@@ -69,6 +70,8 @@ void RpnCalculator::rpn_calculator()
   std::cout << stack_.top();
 }
 
+// TODO: check for overflow!
+
 void RpnCalculator::rpn_calculator_adv()
 {
   std::string::iterator it;;
@@ -118,13 +121,23 @@ bool RpnCalculator::parse_nbr_(std::string::iterator& it, const std::string::ite
   std::istringstream iss(std::string(it, eit));
 
   iss >> tmp_value_;
-  
-  if (tmp_value_ < 0 && tmp_value_ > -10) {
-    ++it;
+
+  if (iss.fail() == true) {
+    return false;
   }
-  else if (tmp_value_ > 9 || tmp_value_ < -9) {
-    throw std::invalid_argument("Numbers are not single digit only.");
+  int result = 0;
+  if (tmp_value_ < 0) {
+    ++result;
+    tmp_value_ = -tmp_value_;
+    result += (tmp_value_ == 0) ? 1 : static_cast<int>(std::log10(tmp_value_) + 1);
+    tmp_value_ = -tmp_value_;
   }
+  else {
+    result += (tmp_value_ == 0) ? 1 : static_cast<int>(std::log10(tmp_value_) + 1);
+  }
+
+  it += result;
+
   return true;
 }
 
