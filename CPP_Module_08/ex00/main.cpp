@@ -20,8 +20,13 @@ void  test_find_vector()
   int pos = std::distance(v.begin(), result);
 
   std::cout << "Number " << *result
-            << " was found at position " << pos
-            << " of the vector v.\n\n";
+            << " was found at position " << pos + 1
+            << " of the vector v: ";
+
+  for (std::vector<int>::const_iterator it = v.begin(); it != v.end(); ++it) {
+    std::cout << *it << ' ';
+  }
+  std::cout << "\n\n";
 }
 
 void  test_not_found_vector()
@@ -50,8 +55,13 @@ void  test_find_list()
   int pos = std::distance(l.begin(), result);
 
   std::cout << "Number " << *result
-            << " was found at position " << pos
-            << " of the list l.\n\n";
+            << " was found at position " << pos + 1
+            << " of the list l: ";
+  
+  for (std::list<int>::const_iterator it = l.begin(); it != l.end(); ++it) {
+    std::cout << *it << ' ';
+  }
+  std::cout << "\n\n";
 }
 
 void  test_not_found_list()
