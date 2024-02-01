@@ -40,22 +40,23 @@ void  Span::add_number(int n)
 
 void  Span::add_range(int start, int end)
 {
-    if (elements_.size() + (end - start) > capacity_) {
-      throw std::length_error("Capacity of Span is reached.");
+  std::srand(time(NULL));
+  if (elements_.size() + (end - start) > capacity_) {
+    throw std::length_error("Capacity of Span is reached.");
+  }
+  if (start > end) {
+    for (int i = start; i > end; --i) {
+      elements_.push_back(std::rand());
     }
-    if (start > end) {
-      for (int i = start; i > end; --i) {
-        elements_.push_back(i);
-      }
+  }
+  else if (start < end) {
+    for (int i = start; i < end; ++i) {
+      elements_.push_back(std::rand());
     }
-    else if (start < end) {
-      for (int i = start; i < end; ++i) {
-        elements_.push_back(i);
-      }
-    }
-    else {
-      throw std::logic_error("Cannot add numbers with range of 0.");
-    }
+  }
+  else {
+    throw std::logic_error("Cannot add numbers with range of 0.");
+  }
 }
 
 const int& Span::operator[](size_t index) const
