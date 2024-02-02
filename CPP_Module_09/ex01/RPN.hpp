@@ -5,10 +5,13 @@
 #include <string>
 #include <cctype>
 #include <iostream>
+#include <sstream>
 
 #ifndef ADVANCED
 #define ADVANCED 0
 #endif
+
+#define DELIMITER ' '
 
 class RpnCalculator {
 public:
@@ -16,18 +19,17 @@ public:
   ~RpnCalculator();
 
   void  rpn_calculator();
-  void  rpn_calculator_adv();
 
 private:
   RpnCalculator();
   RpnCalculator(const RpnCalculator&);
   RpnCalculator& operator=(const RpnCalculator&);
 
-  bool parse_nbr_(std::string::iterator&, const std::string::iterator&);
-  void  skip_space_(std::string::iterator&);
+  bool parse_nbr_(std::string&);
 
   std::stack<int> stack_;
   std::string input_;
+  std::stringstream stream_;
   int  tmp_value_;
 };
 

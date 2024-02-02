@@ -9,12 +9,7 @@ int main(int argc, char *argv[])
   else {
     RpnCalculator rpn(argv[1]);
     try {
-      if (ADVANCED == 0) {
         rpn.rpn_calculator();
-      }
-      else {
-        rpn.rpn_calculator_adv();
-      }
     }
     catch (std::exception& e) {
       std::cerr << e.what() << std::endl;

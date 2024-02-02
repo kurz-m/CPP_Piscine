@@ -80,7 +80,6 @@ ERROR_TEST=(
     "2 - -"
     "2 2 2 -"
     "test"
-    "-2 4 +"
 )
 
 # Run tests with an error

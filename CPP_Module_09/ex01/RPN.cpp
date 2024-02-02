@@ -7,9 +7,7 @@
 static const std::string operators("+-*/");
 
 RpnCalculator::RpnCalculator(const std::string& input)
-  : input_(input)
-{
-}
+  : input_(input) {}
 
 RpnCalculator::RpnCalculator(const RpnCalculator& rhs)
 {
@@ -28,59 +26,14 @@ RpnCalculator::~RpnCalculator() {}
 
 void RpnCalculator::rpn_calculator()
 {
-  std::string::iterator it;;
+  std::string buffer;
+  std::stringstream stream(input_);
 
-  for (it = input_.begin(); it != input_.end(); ++it) {
-    if (std::isdigit(*it)) {
-      stack_.push(std::atoi(&(*it)));
-    }
-    else if (operators.find(*it) != std::string::npos) {
-      if (stack_.size() < 2) {
-        throw std::invalid_argument("Input was not in RPN format.");
-      }
-      int b = stack_.top();
-      stack_.pop();
-      int a = stack_.top();
-      stack_.pop();
-      switch (*it) {
-      case '+':
-        stack_.push(a + b);
-        break;
-      case '-':
-        stack_.push(a - b);
-        break;
-      case '*':
-        stack_.push(a * b);
-        break;
-      case '/':
-        if (b == 0) {
-          throw std::invalid_argument("Cannot divide by 0");
-        }
-        stack_.push(a / b);
-        break;
-      }
-    }
-    else {
-      skip_space_(it);
-    }
-  }
-  if (stack_.size() > 1) {
-    throw std::logic_error("Not enough mathematical operators for the given numbers");
-  }
-  std::cout << stack_.top();
-}
-
-// TODO: check for overflow!
-
-void RpnCalculator::rpn_calculator_adv()
-{
-  std::string::iterator it;;
-
-  for (it = input_.begin(); it != input_.end(); ++it) {
-    if (parse_nbr_(it, input_.end()) == true) {
+  while (std::getline(stream, buffer, DELIMITER)) {
+    if (parse_nbr_(buffer) == true) {
       stack_.push(tmp_value_);
     }
-    else if (operators.find(*it) != std::string::npos) {
+    else if (operators.find(buffer) != std::string::npos) {
       if (stack_.size() < 2) {
         throw std::invalid_argument("Input was not in RPN format.");
       }
@@ -88,7 +41,7 @@ void RpnCalculator::rpn_calculator_adv()
       stack_.pop();
       int a = stack_.top();
       stack_.pop();
-      switch (*it) {
+      switch (buffer[0]) {
       case '+':
         stack_.push(a + b);
         break;
@@ -105,9 +58,6 @@ void RpnCalculator::rpn_calculator_adv()
         stack_.push(a / b);
         break;
       }
-    }
-    else {
-      skip_space_(it);
     }
   }
   if (stack_.size() > 1) {
@@ -116,34 +66,13 @@ void RpnCalculator::rpn_calculator_adv()
   std::cout << stack_.top() << "\n";
 }
 
-bool RpnCalculator::parse_nbr_(std::string::iterator& it, const std::string::iterator& eit)
+bool RpnCalculator::parse_nbr_(std::string& nbr)
 {
-  std::istringstream iss(std::string(it, eit));
+  std::istringstream stream(nbr);
 
-  iss >> tmp_value_;
-
-  if (iss.fail() == true) {
+  stream >> tmp_value_;
+  if (stream.fail() == true) {
     return false;
   }
-  int result = 0;
-  if (tmp_value_ < 0) {
-    ++result;
-    tmp_value_ = -tmp_value_;
-    result += (tmp_value_ == 0) ? 1 : static_cast<int>(std::log10(tmp_value_) + 1);
-    tmp_value_ = -tmp_value_;
-  }
-  else {
-    result += (tmp_value_ == 0) ? 1 : static_cast<int>(std::log10(tmp_value_) + 1);
-  }
-
-  it += result;
-
   return true;
-}
-
-void RpnCalculator::skip_space_(std::string::iterator& it)
-{
-  if (it != input_.end() && std::isspace(*it) == false) {
-    throw std::invalid_argument("You provided a wrong input.");
-  }
 }
