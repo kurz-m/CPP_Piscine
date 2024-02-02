@@ -36,6 +36,11 @@ void  test_not_found_vector()
   std::vector<int>::iterator  result;
   std::vector<int> v(nums, nums + sizeof(nums) / sizeof(nums[0]));
 
+  std::cout << "Try to find number 42 in the vector v: ";
+  for (std::vector<int>::const_iterator it = v.begin(); it != v.end(); ++it) {
+    std::cout << *it << ' ';
+  }
+  std::cout << "\n";
   try {
     result = easyfind(v, 42);
   }
@@ -71,6 +76,11 @@ void  test_not_found_list()
   std::list<int>::iterator  result;
   std::list<int> l(nums, nums + sizeof(nums) / sizeof(nums[0]));
 
+  std::cout << "Try to find number 42 in the list l: ";
+  for (std::list<int>::const_iterator it = l.begin(); it != l.end(); ++it) {
+    std::cout << *it << ' ';
+  }
+  std::cout << "\n";
   try {
     result = easyfind(l, 42);
   }
