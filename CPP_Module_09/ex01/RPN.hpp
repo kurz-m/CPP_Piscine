@@ -27,10 +27,10 @@ private:
 
   bool parse_nbr_(std::string&);
 
-  std::stack<int> stack_;
+  std::stack<float> stack_;
   std::string input_;
   std::stringstream stream_;
-  int  tmp_value_;
+  float  tmp_value_;
 };
 
 #endif

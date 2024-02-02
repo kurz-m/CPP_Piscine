@@ -37,9 +37,9 @@ void RpnCalculator::rpn_calculator()
       if (stack_.size() < 2) {
         throw std::invalid_argument("Input was not in RPN format.");
       }
-      int b = stack_.top();
+      float b = stack_.top();
       stack_.pop();
-      int a = stack_.top();
+      float a = stack_.top();
       stack_.pop();
       switch (buffer[0]) {
       case '+':
@@ -60,7 +60,7 @@ void RpnCalculator::rpn_calculator()
       }
     }
   }
-  if (stack_.size() > 1) {
+  if (stack_.size() != 1) {
     throw std::logic_error("Not enough mathematical operators for the given numbers");
   }
   std::cout << stack_.top() << "\n";
