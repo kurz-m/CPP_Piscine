@@ -9,9 +9,9 @@ Span::Span(size_t N) : capacity_(N)
   elements_.reserve(N);
 }
 
-Span::Span(size_t N, int start, int end) : capacity_(N)
+Span::Span(size_t N, size_t amount) : capacity_(N)
 {
-  add_range(start, end);
+  add_range(amount);
 }
 
 Span::Span(const Span& rhs)
@@ -38,24 +38,14 @@ void  Span::add_number(int n)
   elements_.push_back(n);
 }
 
-void  Span::add_range(int start, int end)
+void  Span::add_range(size_t amount)
 {
   std::srand(time(NULL));
-  if (elements_.size() + (end - start) > capacity_) {
+  if (elements_.size() + amount > capacity_) {
     throw std::length_error("Capacity of Span is reached.");
   }
-  if (start > end) {
-    for (int i = start; i > end; --i) {
-      elements_.push_back(std::rand());
-    }
-  }
-  else if (start < end) {
-    for (int i = start; i < end; ++i) {
-      elements_.push_back(std::rand());
-    }
-  }
-  else {
-    throw std::logic_error("Cannot add numbers with range of 0.");
+  for (size_t i = 0; i < amount; ++i) {
+    elements_.push_back(std::rand());
   }
 }
 

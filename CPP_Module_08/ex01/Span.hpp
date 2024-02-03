@@ -7,7 +7,7 @@
 class Span {
 public:
   explicit Span(size_t N = 0);
-  Span(size_t, int, int);
+  Span(size_t, size_t);
   Span(const Span&);
   Span& operator=(const Span&);
   ~Span();
@@ -23,7 +23,7 @@ public:
     elements_.insert(elements_.end(), first, last);
   }
 
-  void  add_range(int, int);
+  void  add_range(size_t);
 
   const int& operator[](size_t index) const;
 

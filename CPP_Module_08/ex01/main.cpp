@@ -20,7 +20,7 @@ Span  create_random_vector(size_t size)
 void  test_empty_span()
 {
   print_test_name("for empty span.");
-  Span  empty(0);
+  Span  empty;
 
   try {
     empty.add_number(10);
@@ -56,11 +56,11 @@ void  test_add_range_iterators()
 
 void  test_add_range_int()
 {
-  print_test_name("adding a range of numbers via int.");
+  print_test_name("adding a range of numbers via amount.");
   Span  span(10);
 
   std::cout << "Before adding range: " << span << "\n";
-  span.add_range(4, 10);
+  span.add_range(6);
   std::cout << "After adding range: " << span << "\n";
 }
 
