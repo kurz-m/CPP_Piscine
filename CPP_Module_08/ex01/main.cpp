@@ -115,6 +115,15 @@ void  test_print_span()
   std::cout << span << "\n";
 }
 
+void more_numbers_test()
+{
+  print_test_name("a lot of numbers");
+  Span  span(20000, 15000);
+
+  std::cout << "shortest span: " << span.shortest_span() << std::endl;
+  std::cout << "longest span: " << span.longest_span() << std::endl;
+}
+
 int main()
 {
   test_empty_span();
@@ -126,6 +135,7 @@ int main()
   test_longest_range_error();
   test_longest_range();
   test_print_span();
+  more_numbers_test();
 
   return EXIT_SUCCESS;
 }
