@@ -26,12 +26,14 @@ void BitcoinExchange::populate_db_()
   }
   std::string buffer;
   std::getline(ifstrm, buffer);
+  std::istringstream stream;
+
   while(std::getline(ifstrm, buffer)) {
     if (buffer.empty()) {
       continue;
     }
     Date date(buffer.substr(0, buffer.find(DB_DEL)));
-    std::istringstream stream(buffer.substr(buffer.find(DB_DEL) + 1));
+    stream.str(buffer.substr(buffer.find(DB_DEL) + 1));
     stream >> tmp_float_;
     if (stream.fail() || tmp_float_ < 0) {
        throw std::invalid_argument("not a valid bitcoin value");
@@ -49,6 +51,7 @@ void BitcoinExchange::read_input(std::string &input)
 
   std::string buffer;
   std::getline(ifstrm, buffer);
+  std::istringstream stream;
 
   while (std::getline(ifstrm, buffer)) {
     if (buffer.empty()) {
@@ -60,12 +63,12 @@ void BitcoinExchange::read_input(std::string &input)
     catch (const std::exception&) {
       continue;
     }
-    std::istringstream stream(buffer.substr(buffer.find(INPUT_DEL) + 1));
+    stream.str(buffer.substr(buffer.find(INPUT_DEL) + 1));
     stream >> ratio_;
     if (stream.fail() || tmp_float_ > 1000 || tmp_float_ < 0) {
       std::cerr << "ratio is not between 0 and 1000" << std::endl;
       continue;
     }
-    user_input_ = std::pair<Date, float>(date_, ratio_);
+    user_input_ = UserQuery(date_, ratio_);
   }
 }

@@ -16,6 +16,8 @@ public:
   void read_input(std::string&);
 
 private:
+  typedef std::pair<Date, float> UserQuery;
+
   BitcoinExchange(const BitcoinExchange&);
   BitcoinExchange& operator=(const BitcoinExchange&);
 
