@@ -117,7 +117,7 @@ void  Date::is_valid_() const
     0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
   };
 
-  if (year_ < 0 || month_ < 1 || month_ > 12) {
+  if (year_ == 0 || month_ < 1 || month_ > 12) {
     throw std::invalid_argument("invalid date");
   }
 
