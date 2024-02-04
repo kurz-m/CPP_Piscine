@@ -10,7 +10,7 @@ typedef unsigned int uint;
 
 class Date {
 public:
-  explicit Date(std::string&);
+  explicit Date(const std::string&);
   Date(const Date&);
   Date& operator=(const Date&);
   ~Date();

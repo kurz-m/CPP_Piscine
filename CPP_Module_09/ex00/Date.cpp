@@ -4,7 +4,7 @@
 
 Date::Date() : year_(0), month_(0), day_(0) {}
 
-Date::Date(std::string& input) : input_(input)
+Date::Date(const std::string& input) : input_(input)
 {
   populate_date_();
 }
