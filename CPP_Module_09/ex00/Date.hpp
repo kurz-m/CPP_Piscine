@@ -4,28 +4,41 @@
 #include <cstdlib>
 #include <istream>
 
+#define DB_INPUT "data.csv"
+
 typedef unsigned int uint;
 
 class Date {
 public:
-  explicit Date(uint, uint,uint);
   explicit Date(std::string&);
   Date(const Date&);
   Date& operator=(const Date&);
   ~Date();
 
   bool operator<(const Date&) const;
-  std::istream& operator>>(std::istream&);
+  uint get_year() const;
+  uint get_month() const;
+  uint get_day() const;
 
 private:
   Date();
 
-  bool is_leap_year() const;
-  bool is_valid() const;
+  void populate_date_();
+  bool is_leap_year_() const;
+  void is_valid_() const;
 
+  enum {
+     YEAR,
+     MONTH,
+     DAY,
+  };
+
+  std::string input_;
   uint  year_;
   uint  month_;
   uint  day_;
 };
+
+std::ostream& operator<<(std::ostream&, const Date&);
 
 #endif
