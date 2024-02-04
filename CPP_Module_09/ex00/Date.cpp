@@ -38,6 +38,31 @@ bool  Date::operator<(const Date& rhs) const
   return day_ < rhs.day_;
 }
 
+bool  Date::operator<=(const Date& rhs) const
+{
+  return !(rhs < *this);
+}
+
+bool  Date::operator>(const Date& rhs) const
+{
+  return rhs < *this;
+}
+
+bool  Date::operator>=(const Date& rhs) const
+{
+  return !(*this < rhs);
+}
+
+bool  Date::operator==(const Date& rhs) const
+{
+  return year_ == rhs.year_ && month_ == rhs.month_ && day_ == rhs.day_;
+}
+
+bool  Date::operator!=(const Date& rhs) const
+{
+  return !(*this == rhs);
+}
+
 uint Date::get_year() const
 {
   return year_;

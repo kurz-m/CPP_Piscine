@@ -3,7 +3,7 @@
 
 #include <map>
 
-class Date;
+#include "Date.hpp"
 
 #define DB_DEL ","
 #define INPUT_DEL "|"
@@ -22,8 +22,10 @@ private:
   void populate_db_();
 
   std::map<Date, float> db_;
-  std::map<Date, float> user_input_;
+  std::pair<Date, float> user_input_;
   float tmp_float_;
+  float ratio_;
+  Date date_;
 };
 
 #endif
