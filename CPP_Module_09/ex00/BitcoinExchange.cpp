@@ -55,6 +55,7 @@ void BitcoinExchange::read_input(std::string &input)
     throw std::invalid_argument("could not open input file");
   }
 
+  BitcoinExchange::DataBase::const_iterator db_it;
   std::string buffer;
   std::getline(ifstrm, buffer);
   std::istringstream stream;
@@ -66,7 +67,8 @@ void BitcoinExchange::read_input(std::string &input)
     try {
       date_ = Date(buffer.substr(0, buffer.find("|")));
     }
-    catch (const std::exception&) {
+    catch (const std::exception& e) {
+      std::cerr << e.what() << std::endl;
       continue;
     }
     stream.str(buffer.substr(buffer.find("|") + 1));
@@ -76,5 +78,6 @@ void BitcoinExchange::read_input(std::string &input)
       continue;
     }
     user_query_ = UserQuery(date_, ratio_);
+    db_it = db_.lower_bound(user_query_.first);
   }
 }
