@@ -10,7 +10,7 @@ public:
   BitcoinExchange();
   ~BitcoinExchange();
 
-  void read_input(std::string&);
+  void read_input(const std::string&);
 
 private:
   typedef std::pair<Date, float> UserQuery;
