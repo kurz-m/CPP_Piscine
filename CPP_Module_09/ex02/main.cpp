@@ -13,15 +13,17 @@ int main(int argc, char* argv[])
   std::istringstream stream;
   std::vector<int> nbr_vector;
   int tmp = UNDEFINED;
-  for (size_t i = 1; i < argc; ++i) {
+  for (int i = 1; i < argc; ++i) {
     stream.str(argv[i]);
     stream >> tmp;
     if (stream.fail() || tmp < 0) {
       std::cerr << "Failed to extract correct number." << std::endl;
       return EXIT_FAILURE;
     }
+    stream.clear();
     nbr_vector.push_back(tmp);
   }
   PmergeMe vec(nbr_vector);
+  vec.sort();
   return 0;
 }
