@@ -23,12 +23,7 @@ int main(int argc, char* argv[])
     stream.clear();
     nbr_vector.push_back(tmp);
   }
-  PmergeMe<
-    std::vector<int>,
-    std::vector<
-      std::pair<int, int>
-      >
-    >vec(nbr_vector);
+  PmergeMe vec(nbr_vector);
   vec.sort();
   return 0;
 }

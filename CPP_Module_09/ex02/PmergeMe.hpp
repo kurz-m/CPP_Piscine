@@ -11,10 +11,9 @@
 
 // TODO: add 'template <typename Container, typename Pairs>'
 // this helps for then templating
-template <typename Container, typename Pairs>
 class PmergeMe {
 public:
-  PmergeMe(const Container& vec)
+  PmergeMe(const std::vector<int>& vec)
     : main_(vec),
       jcbsthal_(precalculate_jcbsthal_()),
       leftover_(UNDEFINED)
@@ -45,14 +44,14 @@ private:
     return *this;
   }
 
-  void merge_core_(Pairs& main)
+  void merge_core_(std::vector<std::pair<int, int> >& main)
   {
     if (main.size() <= 1)
       return;
 
     size_t mid = main.size() / 2;
-    Pairs left(main.begin(), main.begin() + mid);
-    Pairs right(main.begin() + mid, main.end());
+    std::vector<std::pair<int, int> > left(main.begin(), main.begin() + mid);
+    std::vector<std::pair<int, int> > right(main.begin() + mid, main.end());
 
     merge_core_(left);
     merge_core_(right);
@@ -62,16 +61,11 @@ private:
 
   void split_pairs_()
   {
-    typename Pairs::iterator it;
+    std::vector<std::pair<int, int> >::iterator it;
     for (it = pairs_.begin(); it < pairs_.end(); ++it) {
       main_.push_back(it->first);
       pend_.push_back(it->second);
     }
-    typename Container::iterator cit;
-    for (cit = main_.begin(); cit < main_.end(); ++cit) {
-      std::cout << *cit << " ";
-    }
-    std::cout << std::endl;
   }
 
   void create_pairs_()
@@ -105,10 +99,10 @@ private:
     return tmp_jacob;
   }
 
-  Container main_;
-  Pairs pairs_;
-  Container pend_;
-  Container jcbsthal_;
+  std::vector<int> main_;
+  std::vector<std::pair<int, int> > pairs_;
+  std::vector<int> pend_;
+  std::vector<int> jcbsthal_;
   int leftover_;
 };
 
