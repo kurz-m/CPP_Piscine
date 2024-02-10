@@ -16,7 +16,8 @@ public:
   PmergeMe(const std::vector<int>& vec)
     : main_(vec),
       jcbsthal_(precalculate_jcbsthal_()),
-      leftover_(UNDEFINED)
+      leftover_(UNDEFINED),
+      offset_(0)
       {
         create_pairs_();
       }
@@ -26,6 +27,7 @@ public:
   {
     merge_core_(pairs_);
     split_pairs_();
+    insert_pend_();
   }
 
 private:
@@ -38,8 +40,10 @@ private:
   {
     if (this != &rhs) {
       main_ = rhs.main_;
+      pairs_ = rhs.pairs_;
       pend_ = rhs.pend_;
       leftover_ = rhs.leftover_;
+      offset_ = rhs.offset_;
     }
     return *this;
   }
@@ -62,9 +66,22 @@ private:
   void split_pairs_()
   {
     std::vector<std::pair<int, int> >::iterator it;
-    for (it = pairs_.begin(); it < pairs_.end(); ++it) {
+    main_.push_back(pairs_.at(0).second);
+    main_.push_back(pairs_.at(0).first);
+    for (it = pairs_.begin() + 1; it != pairs_.end(); ++it) {
       main_.push_back(it->first);
       pend_.push_back(it->second);
+    }
+    if (leftover_ != UNDEFINED) {
+      pend_.push_back(leftover_);
+    }
+  }
+
+  void insert_pend_()
+  {
+    std::vector<int>::iterator it;
+    for (it = jcbsthal_.begin(); it != jcbsthal_.end(); ++it) {
+
     }
   }
 
@@ -99,11 +116,12 @@ private:
     return tmp_jacob;
   }
 
-  std::vector<int> main_;
-  std::vector<std::pair<int, int> > pairs_;
-  std::vector<int> pend_;
-  std::vector<int> jcbsthal_;
-  int leftover_;
+  std::vector<int> main_; // container for holding the main chain
+  std::vector<std::pair<int, int> > pairs_; // container for the initial pairing
+  std::vector<int> pend_; // container for holding the pend chain
+  std::vector<int> jcbsthal_; // container for pre-calculated jacobsthal number
+  int leftover_; // int if there is a odd amount of numbers
+  int offset_; // offset for inserting via insertion sort
 };
 
 #endif
