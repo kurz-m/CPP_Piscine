@@ -61,7 +61,7 @@ private:
   //     }
   // }
 
-  void merge_core_(std::vector<std::pair<int, int> >& main, int start, int end)
+  void merge_core_(std::vector<std::multimap<int, int> >& main, int start, int end)
   {
     if (start < end) {
       int mid = start + (end - start) / 2;
@@ -69,7 +69,7 @@ private:
       merge_core_(main, start, mid);
       merge_core_(main, mid + 1, end);
       std::merge(main.begin() + start, main.begin() + mid + 1,
-        main.begin() + mid + 1, main.begin() + end + 1, comp_pair_);
+        main.begin() + mid + 1, main.begin() + end + 1);
     }
   }
 
@@ -85,10 +85,10 @@ private:
     }
     for (size_t i = 0; i + 1 < main_.size(); i += 2) {
       if (main_[i] < main_[i + 1]) {
-        pend_.push_back(std::pair<int, int>(main_[i + 1], main_[i]));
+        pend_.push_back(std::multimap<int, int>(main_[i + 1], main_[i]));
       }
       else {
-        pend_.push_back(std::pair<int, int>(main_[i], main_[i + 1]));
+        pend_.push_back(std::multimap<int, int>(main_[i], main_[i + 1]));
       }
     }
     main_.clear();
@@ -110,7 +110,7 @@ private:
   }
 
   std::vector<int> main_;
-  std::vector<std::pair<int, int> > pend_;
+  std::vector<std::multimap<int, int> > pend_;
   std::vector<int> jcbsthal_;
   int leftover_;
 };
