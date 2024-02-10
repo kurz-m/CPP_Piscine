@@ -1,4 +1,4 @@
-NAME := RPN
+NAME := PmergeMe
 .DEFAULT_GOAL := all
 CXX := c++
 
@@ -52,6 +52,9 @@ $(OBJ_DIR)/%.o: %.cpp | $(OBJ_DIR)
 $(OBJ_DIR):
 	@$(LOG) "Creating object directory."
 	@mkdir -p $@
+
+advanced: CXXFLAGS += $(EXTRA_FLAG)
+advanced: fclean all
 
 debug: CXXFLAGS += -g
 debug: fclean all
