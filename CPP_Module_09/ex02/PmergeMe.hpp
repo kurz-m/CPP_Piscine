@@ -14,13 +14,13 @@
 class PmergeMe {
 public:
   PmergeMe(const std::vector<int>& vec)
-    : main_(vec),
-      jcbsthal_(precalculate_jcbsthal_()),
-      leftover_(UNDEFINED),
-      offset_(0)
-      {
-        create_pairs_();
-      }
+    : pairs_(create_pairs_(vec)),
+      jcbsthal_(precalculate_jcbsthal_(vec)),
+      offset_(1)
+  {
+    main_.reserve(vec.size() + 3);
+    pend_.reserve(vec.size() + 3);
+  }
   ~PmergeMe() {}
 
   void sort()
@@ -68,6 +68,7 @@ private:
     std::vector<std::pair<int, int> >::iterator it;
     main_.push_back(pairs_.at(0).second);
     main_.push_back(pairs_.at(0).first);
+    pend_.push_back(pairs_.at(0).second);
     for (it = pairs_.begin() + 1; it != pairs_.end(); ++it) {
       main_.push_back(it->first);
       pend_.push_back(it->second);
@@ -80,38 +81,56 @@ private:
   void insert_pend_()
   {
     std::vector<int>::iterator it;
+    int prev_jcb = 0;
     for (it = jcbsthal_.begin(); it != jcbsthal_.end(); ++it) {
-
+      int i = *it;
+      if (i > static_cast<int>(pend_.size() - 1)) {
+        i = pend_.size() - 1;
+      }
+      while (i > prev_jcb) {
+        int to_insert = pend_.at(i);
+        std::vector<int>::iterator pos = std::lower_bound(main_.begin(),
+            main_.begin() + i + offset_, to_insert);
+        main_.insert(pos, to_insert);
+        ++offset_;
+        --i;
+      }
+      prev_jcb = *it;
     }
   }
 
-  void create_pairs_()
+  std::vector<std::pair<int, int> > create_pairs_(std::vector<int> input)
   {
-    if (main_.size() % 2 != 0) {
-      leftover_ = main_.back();
+    if (input.size() % 2 != 0) {
+      leftover_ = input.back();
     }
-    for (size_t i = 0; i + 1 < main_.size(); i += 2) {
-      if (main_[i] < main_[i + 1]) {
-        pairs_.push_back(std::pair<int, int>(main_[i + 1], main_[i]));
+    std::vector<std::pair<int, int> > tmp_pairs;
+    for (size_t i = 0; i + 1 < input.size(); i += 2) {
+      if (input[i] < input[i + 1]) {
+        tmp_pairs.push_back(std::pair<int, int>(input[i + 1], input[i]));
       }
       else {
-        pairs_.push_back(std::pair<int, int>(main_[i], main_[i + 1]));
+        tmp_pairs.push_back(std::pair<int, int>(input[i], input[i + 1]));
       }
     }
-    main_.clear();
     // std::vector<std::pair<int, int> >::iterator it;
-    // for (it = pend_.begin(); it < pend_.end(); ++it) {
+    // for (it = tmp_pairs.begin(); it < tmp_pairs.end(); ++it) {
     //   std::cout << "Top:" << it->first << std::endl;
     //   std::cout << "Bottom:" << it->second << std::endl;
     // }
+    return tmp_pairs;
   }
 
-  std::vector<int> precalculate_jcbsthal_()
+  std::vector<int> precalculate_jcbsthal_(std::vector<int> input)
   {
-    size_t threshold = main_.size() / 2 + 1;
+    int threshold = input.size() / 2 + 1;
     std::vector<int> tmp_jacob;
-    for (size_t i = 3; i < threshold; ++i) {
-      tmp_jacob.push_back(((1 << i) - (i % 2 == 0 ? 1 : -1)) / 3);
+    tmp_jacob.push_back(2);
+    for (int i = 4; tmp_jacob.back() < threshold; ++i) {
+      tmp_jacob.push_back((((1 << i) - (i % 2 == 0 ? 1 : -1)) / 3) - 1);
+    }
+    for (std::vector<int>::iterator it = tmp_jacob.begin(); it != tmp_jacob.end(); ++it) {
+      std::cout << *it << std::endl;
     }
     return tmp_jacob;
   }

@@ -3,12 +3,13 @@
 #include <iostream>
 #include <sstream>
 
-#include "PMergeMe_test.hpp"
+#include "PmergeMe.hpp"
 
 int main(int argc, char* argv[])
 {
   if (argc < 2) {
     std::cerr << "Please provide input arguments." << std::endl;
+    return EXIT_FAILURE;
   }
   std::istringstream stream;
   std::vector<int> nbr_vector;
@@ -20,10 +21,10 @@ int main(int argc, char* argv[])
       std::cerr << "Failed to extract correct number." << std::endl;
       return EXIT_FAILURE;
     }
-    stream.clear();
     nbr_vector.push_back(tmp);
+    stream.clear();
   }
   PmergeMe vec(nbr_vector);
   vec.sort();
-  return 0;
+  return EXIT_SUCCESS;
 }
