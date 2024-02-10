@@ -8,7 +8,10 @@
 
 #define UNDEFINED -1
 
-template <typename Container, typename Pairs>
+template<
+  typename Container = std::vector<int>,
+  typename Pairs = std::vector<std::pair<int, int> >
+>
 class PmergeMe {
 public:
   PmergeMe(const Container& vec)
