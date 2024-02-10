@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
     stream.str(argv[i]);
     stream >> tmp;
     if (stream.fail() || tmp < 0) {
-      std::cerr << "Failed to extract number." << std::endl;
+      std::cerr << "Failed to extract correct number." << std::endl;
       return EXIT_FAILURE;
     }
     nbr_vector.push_back(tmp);
