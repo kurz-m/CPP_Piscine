@@ -69,7 +69,7 @@ fclean: clean
 		$(LOG) "Cleaning $(notdir $(NAME))"; \
 		rm -f $(NAME); \
 	else \
-		$(LOG) "No library to clean."; \
+		$(LOG) "No binary to clean."; \
 	fi
 
 re: fclean all
