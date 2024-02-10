@@ -3,16 +3,18 @@
 
 #include <cstddef>
 #include <vector>
-#include <map>
+#include <utility>
 #include <iostream>
 #include <algorithm>
 
 #define UNDEFINED -1
 
-
+// TODO: add 'template <typename Container, typename Pairs>'
+// this helps for then templating
+template <typename Container, typename Pairs>
 class PmergeMe {
 public:
-  PmergeMe(const std::vector<int>& vec)
+  PmergeMe(const Container& vec)
     : main_(vec),
       jcbsthal_(precalculate_jcbsthal_()),
       leftover_(UNDEFINED)
@@ -23,12 +25,8 @@ public:
 
   void sort()
   {
-    merge_core_(pend_, 0, pend_.size() - 1);
-    std::vector<std::pair<int, int> >::iterator it;
-    for (it = pend_.begin(); it < pend_.end(); ++it) {
-      std::cout << "Top:" << it->first << std::endl;
-      std::cout << "Bottom:" << it->second << std::endl;
-    }
+    merge_core_(pairs_);
+    split_pairs_();
   }
 
 private:
@@ -47,35 +45,33 @@ private:
     return *this;
   }
 
-  // void mergeSort(std::vector<int>& arr, int start, int end) {
-  //     if (start < end) { // Base case: subarray with 1 or fewer elements is already sorted
-  //         int mid = start + (end - start) / 2;
-
-  //         // Recursively sort the left and right subarrays
-  //         mergeSort(arr, start, mid);
-  //         mergeSort(arr, mid + 1, end);
-
-  //         // Merge the sorted subarrays using std::merge
-  //         std::merge(arr.begin() + start, arr.begin() + mid + 1,
-  //                   arr.begin() + mid + 1, arr.begin() + end + 1);
-  //     }
-  // }
-
-  void merge_core_(std::vector<std::multimap<int, int> >& main, int start, int end)
+  void merge_core_(Pairs& main)
   {
-    if (start < end) {
-      int mid = start + (end - start) / 2;
+    if (main.size() <= 1)
+      return;
 
-      merge_core_(main, start, mid);
-      merge_core_(main, mid + 1, end);
-      std::merge(main.begin() + start, main.begin() + mid + 1,
-        main.begin() + mid + 1, main.begin() + end + 1);
-    }
+    size_t mid = main.size() / 2;
+    Pairs left(main.begin(), main.begin() + mid);
+    Pairs right(main.begin() + mid, main.end());
+
+    merge_core_(left);
+    merge_core_(right);
+
+    std::merge(left.begin(), left.end(), right.begin(), right.end(), main.begin());
   }
 
-  static bool comp_pair_(const std::pair<int, int>& a, const std::pair<int, int>& b)
+  void split_pairs_()
   {
-      return a.first < b.first;
+    typename Pairs::iterator it;
+    for (it = pairs_.begin(); it < pairs_.end(); ++it) {
+      main_.push_back(it->first);
+      pend_.push_back(it->second);
+    }
+    typename Container::iterator cit;
+    for (cit = main_.begin(); cit < main_.end(); ++cit) {
+      std::cout << *cit << " ";
+    }
+    std::cout << std::endl;
   }
 
   void create_pairs_()
@@ -85,10 +81,10 @@ private:
     }
     for (size_t i = 0; i + 1 < main_.size(); i += 2) {
       if (main_[i] < main_[i + 1]) {
-        pend_.push_back(std::multimap<int, int>(main_[i + 1], main_[i]));
+        pairs_.push_back(std::pair<int, int>(main_[i + 1], main_[i]));
       }
       else {
-        pend_.push_back(std::multimap<int, int>(main_[i], main_[i + 1]));
+        pairs_.push_back(std::pair<int, int>(main_[i], main_[i + 1]));
       }
     }
     main_.clear();
@@ -109,9 +105,10 @@ private:
     return tmp_jacob;
   }
 
-  std::vector<int> main_;
-  std::vector<std::multimap<int, int> > pend_;
-  std::vector<int> jcbsthal_;
+  Container main_;
+  Pairs pairs_;
+  Container pend_;
+  Container jcbsthal_;
   int leftover_;
 };
 
