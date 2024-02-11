@@ -2,9 +2,9 @@
 
 template<typename Container, typename Pairs>
 PmergeMe<Container, Pairs>::PmergeMe(Container& vec, ContainerType type)
-    : pairs_(create_pairs_(vec)),
+    : leftover_(UNDEFINED),
+      pairs_(create_pairs_(vec)),
       jcbsthal_(precalculate_jcbsthal_(vec)),
-      leftover_(UNDEFINED),
       offset_(1),
       start_(clock()),
       end_(0),
@@ -135,7 +135,7 @@ Container PmergeMe<Container, Pairs>::precalculate_jcbsthal_(Container input)
 }
 
 template<typename Container, typename Pairs>
-bool PmergeMe<Container, Pairs>::is_sorted(const Container& vec)
+bool PmergeMe<Container, Pairs>::is_sorted(const Container& vec) const
 {
   for (size_t i = 0; i < vec.size() - 1; ++i) {
     if (vec[i] > vec[i + 1]) {
@@ -146,17 +146,24 @@ bool PmergeMe<Container, Pairs>::is_sorted(const Container& vec)
 }
 
 template<typename Container, typename Pairs>
-void PmergeMe<Container, Pairs>::print_(const std::string& str, const Container& vec)
+void PmergeMe<Container, Pairs>::print_(const std::string& str, const Container& vec) const
 {
   std::cout << str + ":\t";
-  for (size_t i = 0; (i < 5) && (i < vec.size()); i++) {
+  for (size_t i = 0; i < vec.size(); i++) {
     std::cout << vec[i] << " ";
   }
-  std::cout << "\t[...]\n";
 }
 
 template<typename Container, typename Pairs>
-void PmergeMe<Container, Pairs>::print_time_()
+void PmergeMe<Container, Pairs>::print_() const
+{
+  for (size_t i = 0; i < main_.size(); i++) {
+    std::cout << main_[i] << " ";
+  }
+}
+
+template<typename Container, typename Pairs>
+void PmergeMe<Container, Pairs>::print_time_() const
 {
   std::cout << "Time to process a range of " << main_.size()
             << " elements with ";

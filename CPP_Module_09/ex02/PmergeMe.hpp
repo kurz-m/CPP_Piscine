@@ -23,6 +23,7 @@ public:
   ~PmergeMe();
 
   void sort();
+  void print_() const;
 
 private:
   PmergeMe(const PmergeMe& rhs);
@@ -33,15 +34,15 @@ private:
   void insert_pend_();
   Pairs create_pairs_(Container input);
   Container precalculate_jcbsthal_(Container input);
-  bool is_sorted(const Container& vec);
-  void print_(const std::string& str, const Container& vec);
-  void print_time_();
+  bool is_sorted(const Container& vec) const;
+  void print_(const std::string& str, const Container& vec) const;
+  void print_time_() const;
 
+  int leftover_; // int if there is a odd amount of numbers
   Container main_; // container for holding the main chain
   Pairs pairs_; // container for the initial pairing
   Container pend_; // container for holding the pend chain
   Container jcbsthal_; // container for pre-calculated jacobsthal number
-  int leftover_; // int if there is a odd amount of numbers
   int offset_; // offset for inserting via insertion sort
   clock_t start_;
   clock_t end_;
