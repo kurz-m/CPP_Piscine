@@ -30,6 +30,7 @@ vpath %.cpp $(SRC_DIRS)
 ################################################################################
 
 SRCS := $(wildcard *.cpp)
+SRCS := $(filter-out PmergeMe.cpp, $(SRCS))
 
 OBJS := $(addprefix $(OBJ_DIR)/, $(SRCS:%.cpp=%.o))
 
