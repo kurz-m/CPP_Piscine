@@ -63,17 +63,17 @@ bool  Date::operator!=(const Date& rhs) const
   return !(*this == rhs);
 }
 
-uint Date::get_year() const
+int Date::get_year() const
 {
   return year_;
 }
 
-uint Date::get_month() const
+int Date::get_month() const
 {
   return month_;
 }
 
-uint Date::get_day() const
+int Date::get_day() const
 {
   return day_;
 }
@@ -121,7 +121,7 @@ void  Date::is_valid_() const
     throw std::invalid_argument("invalid date");
   }
 
-  uint days = days_in_month[month_];
+  int8_t days = days_in_month[month_];
   if (month_ == 2 && is_leap_year_()) {
     ++days;
   }

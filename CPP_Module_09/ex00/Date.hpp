@@ -6,8 +6,6 @@
 
 #define DB_INPUT "data.csv"
 
-typedef unsigned int uint;
-
 class Date {
 public:
   Date();
@@ -23,9 +21,9 @@ public:
   bool operator==(const Date&) const;
   bool operator!=(const Date&) const;
 
-  uint get_year() const;
-  uint get_month() const;
-  uint get_day() const;
+  int get_year() const;
+  int  get_month() const;
+  int  get_day() const;
 
 private:
   void populate_date_();
@@ -39,9 +37,9 @@ private:
   };
 
   std::string input_;
-  uint  year_;
-  uint  month_;
-  uint  day_;
+  int  year_;
+  int   month_;
+  int   day_;
 };
 
 std::ostream& operator<<(std::ostream&, const Date&);

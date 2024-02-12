@@ -2,10 +2,10 @@ import subprocess
 import os
 
 PROGRAM = './RPN'
-MAKE_TARGETS = ['re', 'fclean']
+MAKE = ['re', 'fclean']
 
 # Build the program
-if not os.system('make re') == 0:
+if not os.system(f"make {MAKE[0]}") == 0:
     print(f"Error building {PROGRAM}.")
     exit(1)
 
@@ -83,4 +83,4 @@ for TEST in ERROR_TEST:
 
 print("Testing complete.")
 
-os.system('make fclean')
+os.system(f"make {MAKE[1]}")

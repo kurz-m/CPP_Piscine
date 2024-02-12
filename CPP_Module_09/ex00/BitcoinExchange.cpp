@@ -64,6 +64,10 @@ void BitcoinExchange::read_input(const std::string &input)
     if (buffer.empty()) {
       continue;
     }
+    else if (buffer.find("|") == std::string::npos) {
+      std::cerr << "Error: bad input => " << buffer << std::endl;
+      continue;
+    }
     try {
       date_ = Date(buffer.substr(0, buffer.find("|")));
     }
@@ -75,7 +79,7 @@ void BitcoinExchange::read_input(const std::string &input)
     stream.str(buffer.substr(buffer.find("|") + 1));
     stream >> ratio_;
     if (stream.fail() || ratio_ > 1000 || ratio_ < 0) {
-      std::cerr << "Error: ratio is not between 0 and 1000" << std::endl;
+      std::cerr << "Error: exchange rate is not between 0 and 1000." << std::endl;
       stream.clear();
       continue;
     }
@@ -83,11 +87,11 @@ void BitcoinExchange::read_input(const std::string &input)
     user_query_ = UserQuery(date_, ratio_);
     db_it = db_.lower_bound(user_query_.first);
     if (db_it == db_.begin()) {
-      std::cerr << "Error: no valid entry found" << std::endl;
+      std::cerr << "Error: bad input => " << buffer << std::endl;
       continue;
     }
     else if (db_it == db_.end()) {
-      std::cerr << "date is above last database entry" << std::endl;
+      std::cerr << "Date is above last database entry, take last entry:" << std::endl;
       --db_it;
     }
     else if (user_query_.first < db_it->first){
