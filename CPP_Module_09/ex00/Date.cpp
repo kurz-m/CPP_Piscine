@@ -97,13 +97,14 @@ void Date::populate_date_()
       istream >> day_;
       break;
     default:
-      throw std::invalid_argument("not a valid date format");
+      throw std::invalid_argument("Error: not a valid date format");
     }
     ++i;
     if (istream.fail()) {
-      throw std::invalid_argument("date is not a number");
+      throw std::invalid_argument("Error: date is not a number");
     }
   }
+  is_valid_();
 }
 
 bool  Date::is_leap_year_() const
@@ -118,7 +119,7 @@ void  Date::is_valid_() const
   };
 
   if ((year_ < 0 || year_ > 2100) || (month_ < 1 || month_ > 12)) {
-    throw std::invalid_argument("invalid date");
+    throw std::invalid_argument("Error: invalid date");
   }
 
   int8_t days = days_in_month[month_];
@@ -127,7 +128,7 @@ void  Date::is_valid_() const
   }
 
   if ((day_ >= 1 && day_ <= days) == false) {
-    throw std::invalid_argument("wrong amount of days in month");
+    throw std::invalid_argument("Error: wrong amount of days in month");
   }
 }
 

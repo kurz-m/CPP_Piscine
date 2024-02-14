@@ -11,9 +11,9 @@ MAKE = ['re', 'fclean']
 def generate_random_date(lower_bound, upper_bound):
     """Generate a random valid date."""
     year = random.randint(lower_bound, upper_bound)
-    month = random.randint(1, 12)
-    day = random.randint(1, 28)
-    return datetime(year, month, day).strftime("%Y-%m-%d")
+    month = random.randint(0, 14)
+    day = random.randint(1, 32)
+    return f"{year}-{month}-{day}"
 
 
 def generate_random_value(ratio_lower, ratio_upper):
@@ -44,19 +44,18 @@ def run_program(filename):
 
 
 if __name__ == '__main__':
+    build_program()
 
     filename = "test_file_1.txt"
-    build_program()
     create_file(filename, 20, 2000, 2030, 0, 500)
     run_program(filename)
 
     filename = "test_file_2.txt"
-    build_program()
+    # build_program()
     create_file(filename, 5, 20, 4000, -10, 800)
     run_program(filename)
 
     filename = "test_file_3.txt"
-    build_program()
     create_file(filename, 50, 2011, 2025, 10, 50)
     run_program(filename)
 
