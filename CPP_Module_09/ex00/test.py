@@ -44,9 +44,9 @@ def run_program(filename):
 
 
 if __name__ == '__main__':
-    build_program()
 
     filename = "test_file_1.txt"
+    build_program()
     create_file(filename, 20, 2000, 2030, 0, 500)
     run_program(filename)
 
@@ -56,6 +56,7 @@ if __name__ == '__main__':
     run_program(filename)
 
     filename = "test_file_3.txt"
+    build_program()
     create_file(filename, 50, 2011, 2025, 10, 50)
     run_program(filename)
 
