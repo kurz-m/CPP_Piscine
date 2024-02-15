@@ -37,6 +37,13 @@ bool handle_vector(int argc, char** argv)
     std::cout << "Error: array already sorted" << std::endl;
     return false;
   }
+  for (size_t i = 0; (i < 8) && (i < nbr_vector.size()); ++i) {
+    std::cout << nbr_vector[i] << " ";
+  }
+  if (nbr_vector.size() > 8) {
+    std::cout << "[...]";
+  }
+  std::cout << std::endl;
   PmergeMe<
     std::vector<int>,
     std::vector<
@@ -44,6 +51,7 @@ bool handle_vector(int argc, char** argv)
       >
   > vec(nbr_vector, VECTOR);
   vec.sort();
+  vec.print_();
   return true;
 }
 
@@ -73,6 +81,7 @@ bool handle_deque(int argc,char** argv)
       >
   > deq(nbr_deque, DEQUE);
   deq.sort();
+  deq.print_();
   return true;
 }
 int main(int argc, char** argv)

@@ -145,9 +145,13 @@ void PmergeMe<Container, Pairs>::print_(const std::string& str, const Container&
 template<typename Container, typename Pairs>
 void PmergeMe<Container, Pairs>::print_() const
 {
-  for (size_t i = 0; i < main_.size(); i++) {
+  for (size_t i = 0; (i < 8) && (i < main_.size()); i++) {
     std::cout << main_[i] << " ";
   }
+  if (main_.size() > 8) {
+    std::cout << "[...]";
+  }
+  std::cout << std::endl;
 }
 
 template<typename Container, typename Pairs>
