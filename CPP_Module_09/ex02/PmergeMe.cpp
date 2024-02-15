@@ -9,8 +9,7 @@ PmergeMe<Container, Pairs>::PmergeMe(Container& vec, ContainerType type)
       start_(clock()),
       end_(0),
       elapsed_(0),
-      type_(type)
-  {}
+      type_(type) {}
 
 template<typename Container, typename Pairs>
 PmergeMe<Container, Pairs>::~PmergeMe() {}
@@ -132,17 +131,6 @@ Container PmergeMe<Container, Pairs>::precalculate_jcbsthal_(Container input)
     tmp_jacob.push_back((((1 << i) - (i % 2 == 0 ? 1 : -1)) / 3) - 1);
   }
   return tmp_jacob;
-}
-
-template<typename Container, typename Pairs>
-bool PmergeMe<Container, Pairs>::is_sorted(const Container& vec) const
-{
-  for (size_t i = 0; i < vec.size() - 1; ++i) {
-    if (vec[i] > vec[i + 1]) {
-      return false;
-    }
-  }
-  return true;
 }
 
 template<typename Container, typename Pairs>

@@ -34,9 +34,9 @@ private:
   void insert_pend_();
   Pairs create_pairs_(Container input);
   Container precalculate_jcbsthal_(Container input);
-  bool is_sorted(const Container& vec) const;
   void print_(const std::string& str, const Container& vec) const;
   void print_time_() const;
+
 
   int leftover_; // int if there is a odd amount of numbers
   Container main_; // container for holding the main chain
