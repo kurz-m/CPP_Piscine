@@ -84,6 +84,7 @@ bool handle_deque(int argc,char** argv)
   deq.print_();
   return true;
 }
+
 int main(int argc, char** argv)
 {
   if (argc < 2) {

@@ -53,9 +53,6 @@ $(OBJ_DIR):
 	@$(LOG) "Creating object directory."
 	@mkdir -p $@
 
-advanced: CXXFLAGS += $(EXTRA_FLAG)
-advanced: fclean all
-
 debug: CXXFLAGS += -g
 debug: fclean all
 
