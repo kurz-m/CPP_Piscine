@@ -43,7 +43,7 @@ void BitcoinExchange::populate_db_()
     if (stream.fail() || tmp_float_ < 0) {
        throw std::invalid_argument("not a valid bitcoin value");
     }
-    db_.insert(std::pair<Date, float>(date, tmp_float_));
+    db_.insert(std::make_pair(date, tmp_float_));
     stream.clear();
   }
 }
