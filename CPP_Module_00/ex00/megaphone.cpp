@@ -6,7 +6,7 @@
 /*   By: makurz <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 23:30:35 by makurz            #+#    #+#             */
-/*   Updated: 2023/10/06 20:52:14 by makurz           ###   ########.fr       */
+/*   Updated: 2024/03/05 00:44:41 by makurz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ std::string to_upper(std::string s)
   std::string::iterator   it;
 
   for (it = s.begin(); it != s.end(); it++) {
+    // alternative solution
+    // if ('a' <= *it && *it <= 'z') {
+    //   *it = (*it ^ (1 << 5));
+    // }
     *it = std::toupper(static_cast<unsigned char>(*it));
   }
   return s;
