@@ -1,9 +1,9 @@
-#include <iostream>
-#include "MateriaSource.hpp"
+#include "Character.hpp"
 #include "Cure.hpp"
 #include "Ice.hpp"
-#include "Character.hpp"
+#include "MateriaSource.hpp"
 #include "utils.hpp"
+#include <iostream>
 
 void test_mand() {
   IMateriaSource *src = new MateriaSource();
@@ -30,8 +30,11 @@ void test_mand() {
 
 void test_extended() {
   MateriaSource src;
-  src.learn_materia(new Ice());
-  src.learn_materia(new Cure());
+  Ice ice;
+  Cure cure;
+
+  src.learn_materia(&ice);
+  src.learn_materia(&cure);
 
   Character c("bob");
   AMateria *tmp;
@@ -51,11 +54,13 @@ void test_extended() {
 
 void test_materia() {
   MateriaSource src;
-  src.learn_materia(new Ice());
-  src.learn_materia(new Cure());
-  src.learn_materia(new Ice());
-  src.learn_materia(new Cure());
-  src.learn_materia(new Cure());
+  Ice ice;
+  Cure cure;
+  src.learn_materia(&ice);
+  src.learn_materia(&ice);
+  src.learn_materia(&cure);
+  src.learn_materia(&cure);
+  src.learn_materia(&ice);
 
   Character c("bob");
   AMateria *tmp;
@@ -73,8 +78,11 @@ void test_materia() {
 
 void test_capacity() {
   MateriaSource src;
-  src.learn_materia(new Ice());
-  src.learn_materia(new Cure());
+
+  Ice ice;
+  Cure cure;
+  src.learn_materia(&ice);
+  src.learn_materia(&cure);
 
   Character c("bob");
   AMateria *tmp;
@@ -104,12 +112,12 @@ void test_capacity() {
 }
 
 int main(int argc, char **argv) {
-  if (argc > 1)
-  {
-    int test = std::string(argv[1]).compare("1") == 0 ? 0 :
-                std::string(argv[1]).compare("2") == 0 ? 1 :
-                std::string(argv[1]).compare("3") == 0 ? 2 :
-                std::string(argv[1]).compare("4") == 0 ? 3 : 100;
+  if (argc > 1) {
+    int test = std::string(argv[1]).compare("1") == 0   ? 0
+               : std::string(argv[1]).compare("2") == 0 ? 1
+               : std::string(argv[1]).compare("3") == 0 ? 2
+               : std::string(argv[1]).compare("4") == 0 ? 3
+                                                        : 100;
     switch (test) {
     case 0:
       test_mand();
@@ -126,8 +134,7 @@ int main(int argc, char **argv) {
     default:
       log_level("unknown test option.", RED, DEBUG);
     }
-  }
-  else {
+  } else {
     std::cerr << "please choose test [1 - 4]!" << std::endl;
   }
   return 0;
